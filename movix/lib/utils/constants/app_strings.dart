@@ -1,0 +1,17 @@
+class AppStrings {
+  static const String newExperience = "New Experience";
+  static const String onboardGreytxt =
+      "Watch a new movie much easier than any before";
+  static const String getStarted = 'Get Started';
+  // Auth
+  static const String alreadyHaveAcc = "Already have an Account?";
+  static const String signIn = "Sign In";
+  static const String signUp = "Sign Up";
+
+  //// LOGIN
+  static const String welcomeBack = "Welcome Back,\n Movie Lover!";
+  static const String forgotPassword = "Forgot Password?";
+  static const String login = "Login";
+  static const String createNewAcc = "Create new Account?";
+  static const String createNewAccount = "Create New Your Account";
+}
