@@ -8,6 +8,6 @@ class ConfirmPaswordInput extends StatelessWidget {
 
    @override
    Widget build(BuildContext context) {
-       return const GlobalInput(isSecure: true,label: "Password", );
+       return const GlobalInput(isSecure: true,label: "Confirm Password", );
   }
 }

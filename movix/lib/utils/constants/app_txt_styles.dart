@@ -8,19 +8,22 @@ class AppTxtStyles {
       fontWeight: FontWeight.w500,
       fontSize: 24.sp,
       color: AppColors.white);
-  static var monts18white500 = montserrat500white.copyWith(
-    fontSize: 18.sp,
+
+  static var monts20white500 = montserrat500white.copyWith(
+    fontSize: 20.sp,
   );
   static var montserrat300Grey = TextStyle(
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w300,
       fontSize: 18.sp,
       color: AppColors.whiteOpacity);
+
   static var montserratRegularGray = TextStyle(
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400,
-      fontSize: 14.sp,
+      fontSize: 16.sp,
       color: AppColors.whiteOpacity);
+
   static var montserratRegularBlue = TextStyle(
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400,
@@ -29,6 +32,8 @@ class AppTxtStyles {
         ..shader = AppColors.blueGradient
             .createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)));
 
-  static var montserratRegularWhite14 =
+  static var montserratRegularWhite16 =
       montserratRegularGray.copyWith(color: AppColors.white);
+
+  static var montRegWhite14 = montserratRegularWhite16.copyWith(fontSize: 14.sp);
 }

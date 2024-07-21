@@ -1,9 +1,11 @@
-const MovieModel = require('../models/movie');
-
+const MovieModel = require('../models/movie.model');
 const movies_controller = {
   getAll: async (req, res) => {
     try {
-      const movies = await MovieModel.find();
+      const movies = await MovieModel.find()
+        .populate('genres')
+        .populate('actors')
+        .populate('ratings');
       res.status(200).send({
         message: "success",
         data: movies,
@@ -15,7 +17,10 @@ const movies_controller = {
   getOne: async (req, res) => {
     const { id } = req.params;
     try {
-      const movie = await MovieModel.findById(id);
+      const movie = await MovieModel.findById(id)
+        .populate('genres')
+        .populate('actors')
+        .populate('ratings');
       if (movie) {
         res.status(200).send({
           message: "success",
@@ -77,6 +82,30 @@ const movies_controller = {
         message: "new movie added",
         data: movie,
       });
+    } catch (error) {
+      res.status(500).send({ error: error.message });
+    }
+  },
+  filterByGenre: async (req, res) => {
+    const { genreId } = req.params;
+    try {
+      const movies = await MovieModel.find({ genres: genreId })
+        .populate('actors') // Populate actors
+        .populate('genres') // Populate genres
+        .populate('ratings') // Populate ratings
+        .exec();
+
+      if (movies.length > 0) {
+        res.status(200).send({
+          message: "success",
+          data: movies,
+        });
+      } else {
+        res.status(404).send({
+          message: "no movies found for this genre",
+          data: null,
+        });
+      }
     } catch (error) {
       res.status(500).send({ error: error.message });
     }

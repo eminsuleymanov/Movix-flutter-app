@@ -10,19 +10,17 @@ const MovieSchemaValidation = Joi.object({
     rated: Joi.string().required(),
     released: Joi.date().format('DD MMM YYYY').utc().required(),
     runtime: Joi.number().min(0).required(),
-    genre: Joi.array().items(Joi.string().min(3)).required(),
+    genres: Joi.array().items(Joi.string().min(3)).required(),
     director: Joi.string().min(3).required(),
-    actors: Joi.array().items(actorSchemaValidation).required(),
+    actors: Joi.array().required(),
     plot: Joi.string().min(10).required(),
     language: Joi.array().items(Joi.string().min(2)).required(),
     country: Joi.string().required(),
     poster: Joi.string().uri().required(),
     videoUrl: Joi.string().uri().required(),
     ratings: Joi.array().items(ratingSchemaValidation),
-    imdbRating: Joi.number().min(0).max(10).required(),
-    imdbID: Joi.string().required(),
     type: Joi.string().required(),
-    boxOffice: Joi.number().min(0).required()
+    boxOffice: Joi.string().required()
 });
 
 module.exports = MovieSchemaValidation;

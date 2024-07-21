@@ -2,5 +2,20 @@
 import 'package:flutter/material.dart';
 
 class AppPaddings {
+  static const EdgeInsets all8 =EdgeInsets.all(8);
+  static const EdgeInsets all10 =EdgeInsets.all(10);
   static const EdgeInsets all16 =EdgeInsets.all(16);
+
+  static const EdgeInsets h12 = EdgeInsets.symmetric(horizontal: 12.0);
+  static const EdgeInsets h16 = EdgeInsets.symmetric(horizontal: 16.0);
+  static const EdgeInsets h20 = EdgeInsets.symmetric(horizontal: 20.0);
+  static const EdgeInsets h24 = EdgeInsets.symmetric(horizontal: 24.0);
+
+  static const EdgeInsets v8 = EdgeInsets.symmetric(vertical: 8.0);
+  static const EdgeInsets v10 = EdgeInsets.symmetric(vertical: 10.0);
+  static const EdgeInsets v12 = EdgeInsets.symmetric(vertical: 12.0);
+
+  static const EdgeInsets r16 =EdgeInsets.only(right: 16);
+  
+  static const EdgeInsets l16 =EdgeInsets.only(left: 16);
 }

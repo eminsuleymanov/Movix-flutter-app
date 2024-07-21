@@ -23,14 +23,15 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: AppPaddings.all16,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
-            SvgPicture.asset(
-              AssetsPaths.appLogo,
-              width: 120.w,
-              height: 120.h,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: SvgPicture.asset(
+                AssetsPaths.appLogo,
+                width: 120.w,
+                height: 120.h,
+              ),
             ),
             Text(
               AppStrings.welcomeBack,
@@ -57,7 +58,7 @@ class LoginPage extends StatelessWidget {
             AuthMiniLinks(
               grayTxt: AppStrings.createNewAcc,
               blueTxt: AppStrings.signUp,
-              onPressed: ()=>Navigate.to(context, const RegisterPage()),
+              onPressed: () => Navigate.to(context, const RegisterPage()),
             ),
             SizedBox(
               height: 26.h,

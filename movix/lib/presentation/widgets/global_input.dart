@@ -51,7 +51,7 @@ class _GlobalInputState extends State<GlobalInput> {
         }
         return null;
       },
-      style: AppTxtStyles.monts18white500,
+      style: AppTxtStyles.monts20white500,
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.all(16),

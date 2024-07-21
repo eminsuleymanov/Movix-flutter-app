@@ -13,5 +13,13 @@ class AppStrings {
   static const String forgotPassword = "Forgot Password?";
   static const String login = "Login";
   static const String createNewAcc = "Create new Account?";
-  static const String createNewAccount = "Create New Your Account";
+  static const String createNewAccount = "Create New \n Your Account";
+
+  //// Home
+  static const String findYourBest = "Find Your Best \nMovie";
+  static const String searchMovie = "Search Movie";
+  static const String nowPlaying = "Now Playing";
+  static const String viewAll = "View all";
+  static const String comingSoon = "Coming Soon";
+
 }

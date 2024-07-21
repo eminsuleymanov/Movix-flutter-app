@@ -11,7 +11,7 @@ class ForgotPasswordTxt extends StatelessWidget {
     return TextButton(
       child: Text(
         AppStrings.forgotPassword,
-        style: AppTxtStyles.montserratRegularWhite14,
+        style: AppTxtStyles.montserratRegularWhite16,
         // textAlign: TextAlign.end,
       ),
       onPressed: () {},

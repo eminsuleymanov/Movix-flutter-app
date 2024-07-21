@@ -37,7 +37,7 @@ class GlobalButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: AppTxtStyles.monts18white500,
+            style: AppTxtStyles.monts20white500,
           ),
         ),
       ),

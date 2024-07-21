@@ -10,6 +10,7 @@ import 'package:movix/utils/constants/app_strings.dart';
 import 'package:movix/utils/constants/app_txt_styles.dart';
 
 import '../../../widgets/global_button.dart';
+import '../../../widgets/global_profile_avatar.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -17,44 +18,55 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 30,
+        foregroundColor: AppColors.white,
+        automaticallyImplyLeading: true,
+        backgroundColor: AppColors.backgroundPrimary,
+        
+      ),
       body: SafeArea(
         child: Padding(
-          padding: AppPaddings.all16,
-          child: Column(
-            children: [
-              Text(
-                AppStrings.createNewAccount,
-                style: AppTxtStyles.montserrat500white,
-              ),
-              SizedBox(
-                height: 60.h,
-              ),
-              const RegisterFullnameInput(),
-              SizedBox(
-                height: 28.h,
-              ),
-              const RegisterEmailInput(),
-              SizedBox(
-                height: 28.h,
-              ),
-              const RegisterPasswordInput(),
-              SizedBox(
-                height: 28.h,
-              ),
-              const ConfirmPaswordInput(),
-              SizedBox(
-              height: 34.h,
-            ),
-            const Center(
-              child: GlobalButton(
-                text: AppStrings.signIn,
-                color: AppColors.purple,
-              ),
-            ),
-        
-            ],
-          ),
-        ),
+            padding: AppPaddings.all16,
+            child: ListView(
+              children: [
+                Text(
+                  AppStrings.createNewAccount,
+                  style: AppTxtStyles.montserrat500white,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                const GlobalProfileAvatar(),
+                SizedBox(
+                  height: 40.h,
+                ),
+                const RegisterFullnameInput(),
+                SizedBox(
+                  height: 28.h,
+                ),
+                const RegisterEmailInput(),
+                SizedBox(
+                  height: 28.h,
+                ),
+                const RegisterPasswordInput(),
+                SizedBox(
+                  height: 28.h,
+                ),
+                const ConfirmPaswordInput(),
+                SizedBox(
+                  height: 34.h,
+                ),
+                const Center(
+                  child: GlobalButton(
+                    text: AppStrings.signIn,
+                    color: AppColors.purple,
+                  ),
+                ),
+              ],
+            )),
       ),
     );
   }
