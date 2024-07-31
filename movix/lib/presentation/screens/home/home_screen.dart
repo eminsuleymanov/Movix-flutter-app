@@ -10,6 +10,7 @@ import '../../../utils/constants/app_strings.dart';
 import '../../../utils/constants/app_txt_styles.dart';
 import '../../../utils/constants/assets_paths.dart';
 import '../../widgets/global_section_headlines.dart';
+import 'widgets/bannerSlider/banner_slider.dart';
 import 'widgets/category_list.dart';
 import 'widgets/searchbar_with_filter.dart';
 
@@ -55,6 +56,7 @@ class HomeScreen extends StatelessWidget {
               heading: AppStrings.nowPlaying,
               onPressed: () {},
             ),
+            BannerSlider(),
           ],
         ),
       ),
