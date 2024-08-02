@@ -22,7 +22,7 @@ class MovieService {
         throw Exception('Failed to load movies');
       }
     } catch (e) {
-      log("$e");
+      log("Errorrr: $e");
       throw Exception('Failed to load movies');
     }
   }

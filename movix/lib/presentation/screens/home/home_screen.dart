@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movix/cubits/category/cubit/category_cubit.dart';
+import 'package:movix/presentation/screens/home/widgets/movie_list.dart';
 
+import '../../../cubits/category/cubit/category_cubit.dart';
+import '../../../cubits/movie/cubit/movie_cubit.dart';
 import '../../../utils/constants/app_colors.dart';
 import '../../../utils/constants/app_paddings.dart';
+import '../../../utils/constants/app_sizedboxes.dart';
 import '../../../utils/constants/app_strings.dart';
 import '../../../utils/constants/app_txt_styles.dart';
 import '../../../utils/constants/assets_paths.dart';
@@ -35,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                 radius: 25.r,
                 child: SvgPicture.asset(
                   AssetsPaths.avatar,
-                  width: 50.w,
+                  width: 50.h,
                   height: 50.h,
                 ),
               ),
@@ -43,22 +46,41 @@ class HomeScreen extends StatelessWidget {
           ]),
       body: Padding(
         padding: AppPaddings.all16,
-        child: Column(
-          children: [
-            const SearchbarWithFilter(),
-            20.verticalSpace,
-            BlocProvider(
-              create: (_) => CategoryCubit()..getCategories(),
-              child: const CategoryList(),
-            ),
-            25.verticalSpace,
-            GlobalSectionHeadlines(
-              heading: AppStrings.nowPlaying,
-              onPressed: () {},
-            ),
-            BannerSlider(),
-          ],
-        ),
+        child: ListView(children: [
+          Column(
+            children: [
+              const SearchbarWithFilter(),
+              AppSizedboxes.h20,
+              BlocProvider(
+                create: (context) => CategoryCubit()..getCategories(),
+                child: const CategoryList(),
+              ),
+              AppSizedboxes.h25,
+              GlobalSectionHeadlines(
+                heading: AppStrings.nowPlaying,
+                onPressed: () {},
+              ),
+              AppSizedboxes.h20,
+              BlocProvider(
+                create: (context) => MovieCubit()..getMovies(),
+                child: const BannerSlider(),
+              ),
+              AppSizedboxes.h25,
+              GlobalSectionHeadlines(
+                heading: AppStrings.comingSoon,
+                onPressed: () {},
+              ),
+              AppSizedboxes.h20,
+              BlocProvider(
+                create: (context) => MovieCubit()..getMovies(),
+                child: const MovieList(),
+              ),
+              AppSizedboxes.h25,
+              
+
+            ],
+          )
+        ]),
       ),
     );
   }

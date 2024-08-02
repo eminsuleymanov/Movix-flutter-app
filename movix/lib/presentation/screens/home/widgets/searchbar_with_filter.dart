@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movix/utils/constants/app_colors.dart';
 import 'package:movix/utils/constants/app_paddings.dart';
 import 'package:movix/utils/constants/app_sizedboxes.dart';
