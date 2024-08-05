@@ -22,4 +22,7 @@ class AppStrings {
   static const String viewAll = "View all";
   static const String comingSoon = "Coming Soon";
 
+  //// Search
+  static const String searchResults ='Search Results';
+
 }

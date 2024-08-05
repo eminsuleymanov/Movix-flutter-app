@@ -21,11 +21,21 @@ class MovieCubit extends Cubit<MovieState> {
     try {
       final movies = await _movieService.getMovies();
       _moviesSubject.add(movies);
-      
-      emit(MovieSuccess(movies));
 
+      emit(MovieSuccess(movies));
     } on SocketException catch (e) {
       emit(MovieNetworkError(e.toString()));
+    } catch (e) {
+      emit(MovieError(e.toString()));
+    }
+  }
+
+  Future<void> searchMovies(String query) async {
+    try {
+      emit(MovieLoading());
+      final movies = await _movieService.getMovies(query: query);
+      emit(MovieSuccess(movies));
+      
     } catch (e) {
       emit(MovieError(e.toString()));
     }

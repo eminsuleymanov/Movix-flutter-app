@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../cubits/movie/cubit/movie_cubit.dart';
-import 'movie_slider_item.dart';
-
+import '../movie_box.dart';
 
 class BannerSlider extends StatelessWidget {
   const BannerSlider({super.key});
@@ -20,14 +19,16 @@ class BannerSlider extends StatelessWidget {
               itemCount: state.movies.length,
               itemBuilder: (context, index, realIndex) {
                 final movie = state.movies[index];
-                return MovieSliderItem(
+                return MovieBox(
                   movie: movie,
-                );
+                  width: 300,
+                  isSliderItem: true,
+                ); 
               },
               options: CarouselOptions(
+                height: 250,
                 enlargeCenterPage: true,
-                autoPlay: true,
-                enlargeFactor: .35
+                autoPlay: false,
               ));
         } else if (state is MovieError) {
           return Center(

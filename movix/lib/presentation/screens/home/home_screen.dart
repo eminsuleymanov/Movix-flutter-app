@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movix/presentation/screens/home/widgets/movie_list.dart';
 
-import '../../../cubits/category/cubit/category_cubit.dart';
+import '../../../core/routes/generator.dart';
 import '../../../cubits/movie/cubit/movie_cubit.dart';
 import '../../../utils/constants/app_colors.dart';
 import '../../../utils/constants/app_paddings.dart';
@@ -13,8 +12,10 @@ import '../../../utils/constants/app_strings.dart';
 import '../../../utils/constants/app_txt_styles.dart';
 import '../../../utils/constants/assets_paths.dart';
 import '../../widgets/global_section_headlines.dart';
+import '../search/search_screen.dart';
 import 'widgets/bannerSlider/banner_slider.dart';
 import 'widgets/category_list.dart';
+import 'widgets/movie_list.dart';
 import 'widgets/searchbar_with_filter.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -47,39 +48,29 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: AppPaddings.all16,
         child: ListView(children: [
-          Column(
-            children: [
-              const SearchbarWithFilter(),
-              AppSizedboxes.h20,
-              BlocProvider(
-                create: (context) => CategoryCubit()..getCategories(),
-                child: const CategoryList(),
-              ),
-              AppSizedboxes.h25,
-              GlobalSectionHeadlines(
-                heading: AppStrings.nowPlaying,
-                onPressed: () {},
-              ),
-              AppSizedboxes.h20,
-              BlocProvider(
-                create: (context) => MovieCubit()..getMovies(),
-                child: const BannerSlider(),
-              ),
-              AppSizedboxes.h25,
-              GlobalSectionHeadlines(
-                heading: AppStrings.comingSoon,
-                onPressed: () {},
-              ),
-              AppSizedboxes.h20,
-              BlocProvider(
-                create: (context) => MovieCubit()..getMovies(),
-                child: const MovieList(),
-              ),
-              AppSizedboxes.h25,
-              
-
-            ],
-          )
+          SearchbarWithFilter(
+            onSearch: (query) {
+            final movieCubit = context.read<MovieCubit>();
+            movieCubit.searchMovies(query);
+            Navigate.to(context, SearchScreen(query: query));
+          }),
+          AppSizedboxes.h20,
+          const CategoryList(),
+          AppSizedboxes.h25,
+          GlobalSectionHeadlines(
+            heading: AppStrings.nowPlaying,
+            onPressed: () {},
+          ),
+          AppSizedboxes.h20,
+          const BannerSlider(),
+          AppSizedboxes.h25,
+          GlobalSectionHeadlines(
+            heading: AppStrings.comingSoon,
+            onPressed: () {},
+          ),
+          AppSizedboxes.h20,
+          const MovieList(),
+          AppSizedboxes.h25
         ]),
       ),
     );

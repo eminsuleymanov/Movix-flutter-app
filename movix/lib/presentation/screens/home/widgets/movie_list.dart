@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movix/cubits/movie/cubit/movie_cubit.dart';
 import 'package:movix/utils/constants/app_sizedboxes.dart';
 
@@ -11,7 +12,7 @@ class MovieList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 210.h,
       child: BlocBuilder<MovieCubit, MovieState>(
         builder: (context, state) {
           if (state is MovieLoading) {
@@ -21,7 +22,9 @@ class MovieList extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   final movie = state.movies[index];
-                  return  MovieBox(movie:movie);
+                  return MovieBox(
+                    movie: movie,
+                  );
                 },
                 separatorBuilder: (_, i) => AppSizedboxes.w16,
                 itemCount: state.movies.length);

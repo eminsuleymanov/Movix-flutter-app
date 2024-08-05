@@ -1,15 +1,35 @@
 const MovieModel = require('../models/movie.model');
 const movies_controller = {
   getAll: async (req, res) => {
+    const { title } = req.query;
     try {
-      const movies = await MovieModel.find()
-        .populate('genres')
-        .populate('actors')
-        .populate('ratings');
-      res.status(200).send({
-        message: "success",
-        data: movies,
-      });
+      let movies;
+      if (title) {
+        const regex = new RegExp(title, 'i');
+        movies = await MovieModel.find({ title: { $regex: regex } })
+          .populate('genres')
+          .populate('actors')
+          .populate('ratings');
+
+      }
+      else {
+        movies = await MovieModel.find()
+          .populate('genres')
+          .populate('actors')
+          .populate('ratings');
+      }
+      if (movies.length > 0) {
+        res.status(200).send({
+          message: "success",
+          data: movies,
+        });
+      }
+      else {
+        res.status(204).send({
+          message: "not found",
+          data: null,
+        });
+      }
     } catch (error) {
       res.status(500).send({ error: error.message });
     }

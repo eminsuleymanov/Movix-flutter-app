@@ -9,10 +9,11 @@ import '../models/movie.dart';
 class MovieService {
   final Dio _dio = Dio();
 
-  Future<List<MovieResponse>> getMovies() async {
+  Future<List<MovieResponse>> getMovies({String? query}) async {
     const moviesEndpoint = Endpoints.movies;
     try {
-      final response = await _dio.get(moviesEndpoint);
+      final response = await _dio.get(moviesEndpoint,
+          queryParameters: query != null ? {'title': query} : null);
       if (response.statusCode.isSuccess) {
         List<MovieResponse> movies = (response.data['data'] as List)
             .map((movieJson) => MovieResponse.fromJson(movieJson))
@@ -22,7 +23,7 @@ class MovieService {
         throw Exception('Failed to load movies');
       }
     } catch (e) {
-      log("Errorrr: $e");
+      log("Service Error: $e");
       throw Exception('Failed to load movies');
     }
   }
@@ -41,7 +42,7 @@ class MovieService {
         throw Exception('Failed to load movies by genre');
       }
     } catch (e) {
-      log("$e");
+      log("Service genre error: $e");
       throw Exception('Failed to load movies by genre');
     }
   }
