@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,10 +15,10 @@ import '../../../utils/constants/app_txt_styles.dart';
 import '../../../utils/constants/assets_paths.dart';
 import '../../widgets/global_section_headlines.dart';
 import '../search/search_screen.dart';
+import '../search/widgets/searchbar_with_filter.dart';
 import 'widgets/bannerSlider/banner_slider.dart';
 import 'widgets/category_list.dart';
 import 'widgets/movie_list.dart';
-import 'widgets/searchbar_with_filter.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -52,7 +54,12 @@ class HomeScreen extends StatelessWidget {
             onSearch: (query) {
             final movieCubit = context.read<MovieCubit>();
             movieCubit.searchMovies(query);
-            Navigate.to(context, SearchScreen(query: query));
+            Navigate.to(context, SearchScreen(query: query)).then((_) {
+                  log('Controller: ${movieCubit.controller.text}');
+                  movieCubit.resetInput();
+                  movieCubit.getMovies();
+                  log('in home screen'); 
+                });
           }),
           AppSizedboxes.h20,
           const CategoryList(),

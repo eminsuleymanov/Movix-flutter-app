@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -13,7 +14,7 @@ class MovieCubit extends Cubit<MovieState> {
 
   final MovieService _movieService = MovieService();
   final _moviesSubject = BehaviorSubject<List<MovieResponse>>();
-
+  final TextEditingController controller = TextEditingController();
   Stream<List<MovieResponse>> get moviesStream => _moviesSubject.stream;
 
   void getMovies() async {
@@ -35,15 +36,18 @@ class MovieCubit extends Cubit<MovieState> {
       emit(MovieLoading());
       final movies = await _movieService.getMovies(query: query);
       emit(MovieSuccess(movies));
-      
+      resetInput();
     } catch (e) {
       emit(MovieError(e.toString()));
     }
   }
-
+  void resetInput(){
+    controller.clear();
+  }
   @override
   Future<void> close() {
     _moviesSubject.close();
+    controller.dispose();
     return super.close();
   }
 }

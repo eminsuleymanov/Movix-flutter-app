@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movix/cubits/movie/cubit/movie_cubit.dart';
 
 import '../../../../utils/constants/app_colors.dart';
 import '../../../../utils/constants/app_paddings.dart';
@@ -15,7 +17,7 @@ class SearchbarWithFilter extends StatelessWidget {
   final Function(String) onSearch;
   @override
   Widget build(BuildContext context) {
-    final TextEditingController searchController = TextEditingController();
+    final cubit = context.read<MovieCubit>(); 
     return Row(
       children: [
         Expanded(
@@ -25,7 +27,7 @@ class SearchbarWithFilter extends StatelessWidget {
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: TextField(
-              controller: searchController,
+              controller: cubit.controller,
               style: AppTxtStyles.montserratRegularWhite16,
               decoration: InputDecoration(
                 prefixIcon: const Padding(
@@ -41,7 +43,6 @@ class SearchbarWithFilter extends StatelessWidget {
                 border: InputBorder.none,
               ),
               onSubmitted: (value) {
-                value = searchController.text;
                 if (value.isNotEmpty) {
                   onSearch(value);
                 }

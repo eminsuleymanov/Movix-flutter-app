@@ -20,7 +20,7 @@ class MovieService {
             .toList();
         return movies;
       } else {
-        throw Exception('Failed to load movies');
+        throw Exception('Failed to load movies: status code is ${response.statusCode}');
       }
     } catch (e) {
       log("Service Error: $e");
