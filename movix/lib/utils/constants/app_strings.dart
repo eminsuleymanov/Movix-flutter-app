@@ -21,6 +21,8 @@ class AppStrings {
   static const String nowPlaying = "Now Playing";
   static const String viewAll = "View all";
   static const String comingSoon = "Coming Soon";
+  static const String trending = "Trending";
+
 
   //// Search
   static const String searchResults ='Search Results';

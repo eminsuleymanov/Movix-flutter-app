@@ -12,6 +12,7 @@ class AppColors {
     colors: [AppColors.lightBlueGradient1, AppColors.lightBlueGradient2],
   );
   static const purple = Color.fromRGBO(62,91,249,1);
+  static const yellow = Color(0xffF6C806);
 
   static const primarySwatch = MaterialColor(0xff0B0F2F, <int, Color>{
     50: Color.fromRGBO(9, 11, 45, .1),

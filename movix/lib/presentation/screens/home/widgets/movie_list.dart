@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movix/core/routes/generator.dart';
 import 'package:movix/cubits/movie/cubit/movie_cubit.dart';
+import 'package:movix/presentation/screens/detail/detail_screen.dart';
 import 'package:movix/utils/constants/app_sizedboxes.dart';
 
 import 'movie_box.dart';
@@ -24,6 +26,7 @@ class MovieList extends StatelessWidget {
                   final movie = state.movies[index];
                   return MovieBox(
                     movie: movie,
+                    onTap: () => Navigate.to(context, DetailScreen(movie: movie)),
                   );
                 },
                 separatorBuilder: (_, i) => AppSizedboxes.w16,

@@ -72,6 +72,13 @@ class HomeScreen extends StatelessWidget {
           const BannerSlider(),
           AppSizedboxes.h25,
           GlobalSectionHeadlines(
+            heading: AppStrings.trending,
+            onPressed: () {},
+          ),
+          AppSizedboxes.h20,
+          const MovieList(),
+          AppSizedboxes.h25,
+          GlobalSectionHeadlines(
             heading: AppStrings.comingSoon,
             onPressed: () {},
           ),

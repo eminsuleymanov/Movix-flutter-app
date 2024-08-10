@@ -5,6 +5,15 @@ class AppPaddings {
   static const EdgeInsets all8 =EdgeInsets.all(8);
   static const EdgeInsets all10 =EdgeInsets.all(10);
   static const EdgeInsets all16 =EdgeInsets.all(16);
+  static const EdgeInsets exceptTop16 = EdgeInsets.fromLTRB(
+    16.0,  // left
+    0.0,   // top
+    16.0,  // right
+    16.0,  // bottom
+  );
+
+
+  static const EdgeInsets h8v4 = EdgeInsets.symmetric(horizontal: 8.0,vertical: 4);
 
   static const EdgeInsets h12 = EdgeInsets.symmetric(horizontal: 12.0);
   static const EdgeInsets h16 = EdgeInsets.symmetric(horizontal: 16.0);
