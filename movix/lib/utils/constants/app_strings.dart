@@ -27,4 +27,11 @@ class AppStrings {
   //// Search
   static const String searchResults ='Search Results';
 
+  /// Detail
+  static const String cast = 'Cast';
+  static const String trailer = 'Trailer';
+
+  /// Wishlist
+  static const String wishlist = 'Wishlist';
+
 }
