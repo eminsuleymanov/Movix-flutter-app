@@ -10,5 +10,6 @@ class Endpoints {
   //Movies
   static const movies = "$_baseUrl/movies";
   static const movieById = "$_baseUrl/movies/:id";
-  static const movieByGenre = "$_baseUrl/movies/genre/:genreId";
+  static const movieByGenre = "$_baseUrl/movies/genre";
+  static const trendingMovies = "$_baseUrl/movies/trending";
 }

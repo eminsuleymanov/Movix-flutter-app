@@ -4,6 +4,7 @@ const movies_controller = require("../controllers/movies.controller")
 const moviesRouter = express.Router()
 
 moviesRouter.get("/api/movies",movies_controller.getAll)
+moviesRouter.get("/api/movies/trending",movies_controller.getTrendingMovies)
 moviesRouter.post("/api/movies",movie_middleware,movies_controller.post) // middleware included
 moviesRouter.get("/api/movies/:id",movies_controller.getOne)
 moviesRouter.get('/api/movies/genre/:genreId', movies_controller.filterByGenre);

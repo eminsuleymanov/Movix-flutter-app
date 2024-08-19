@@ -2,37 +2,46 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/routes/generator.dart';
 import '../../../../../cubits/movie/cubit/movie_cubit.dart';
+import '../../../../../data/models/movie.dart';
+import '../../../detail/detail_screen.dart';
 import '../movie_box.dart';
 
 class BannerSlider extends StatelessWidget {
-  const BannerSlider({super.key});
-
+  const BannerSlider({super.key, required this.isTrending});
+  final bool isTrending;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieCubit, MovieState>(
-      builder: (context, state) {
-        if (state is MovieLoading) {
+    final cubit = context.read<MovieCubit>();
+
+    return FutureBuilder<List<MovieResponse>>(
+      future: isTrending ? cubit.getTrendingMovies() : cubit.getMovies(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator.adaptive());
-        } else if (state is MovieSuccess) {
+        } else if (snapshot.hasData) {
+          final movies = snapshot.data!;
           return CarouselSlider.builder(
-              itemCount: state.movies.length,
-              itemBuilder: (context, index, realIndex) {
-                final movie = state.movies[index];
-                return MovieBox(
-                  movie: movie,
-                  width: 300,
-                  isSliderItem: true,
-                ); 
-              },
-              options: CarouselOptions(
-                height: 250,
-                enlargeCenterPage: true,
-                autoPlay: false,
-              ));
-        } else if (state is MovieError) {
+            itemCount: movies.length,
+            itemBuilder: (context, index, realIndex) {
+              final movie = movies[index];
+              return MovieBox(
+                movie: movie,
+                width: 300,
+                isSliderItem: true,
+                onTap: () => Navigate.to(context, DetailScreen(movie: movie)),
+              );
+            },
+            options: CarouselOptions(
+              height: 250,
+              enlargeCenterPage: true,
+              autoPlay: false,
+            ),
+          );
+        } else if (snapshot.hasError) {
           return Center(
-              child: Text('Failedd to load movies: ${state.message}'));
+              child: Text('Failed to load movies: ${snapshot.error}'));
         } else {
           return const SizedBox();
         }

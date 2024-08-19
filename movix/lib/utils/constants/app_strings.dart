@@ -20,8 +20,10 @@ class AppStrings {
   static const String searchMovie = "Search Movie";
   static const String nowPlaying = "Now Playing";
   static const String viewAll = "View all";
-  static const String comingSoon = "Coming Soon";
+  static const String mostViewed = "Most Viewed";
   static const String trending = "Trending";
+  static const String filteredMovies = "Filtered Movies";
+  static const String allMovies = "All Movies";
 
 
   //// Search

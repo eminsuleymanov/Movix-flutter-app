@@ -20,7 +20,8 @@ class MovieService {
             .toList();
         return movies;
       } else {
-        throw Exception('Failed to load movies: status code is ${response.statusCode}');
+        throw Exception(
+            'Failed to load movies: status code is ${response.statusCode}');
       }
     } catch (e) {
       log("Service Error: $e");
@@ -33,17 +34,40 @@ class MovieService {
     try {
       final response = await _dio.get('$endpoint/$genreId');
 
+      if (response.statusCode.isSuccess) {
+        List<MovieResponse> movies = (response.data['data'] as List)
+            .map((movieJson) => MovieResponse.fromJson(movieJson))
+            .toList();
+        return movies;
+      } else if (response.statusCode == 404) {
+        log('No movies found for genre ID: $genreId');
+        throw Exception('No movies found for the selected genre.');
+      } else {
+        throw Exception(
+            'Failed to load movies by genre. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      log("Service genre error: $e");
+      throw Exception('Error occurred while fetching movies by genre.');
+    }
+  }
+
+  Future<List<MovieResponse>> getTrendingMovies() async {
+    const endpoint = Endpoints.trendingMovies;
+    try {
+      final response = await _dio.get(endpoint);
+
       if (response.statusCode == 200) {
         List<MovieResponse> movies = (response.data['data'] as List)
             .map((movieJson) => MovieResponse.fromJson(movieJson))
             .toList();
         return movies;
       } else {
-        throw Exception('Failed to load movies by genre');
+        throw Exception('Failed to load trending movies');
       }
     } catch (e) {
-      log("Service genre error: $e");
-      throw Exception('Failed to load movies by genre');
+      log("Service trending error: $e");
+      throw Exception('error fetching trending movies');
     }
   }
 }

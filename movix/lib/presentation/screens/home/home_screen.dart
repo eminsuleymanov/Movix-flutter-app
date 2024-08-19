@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,16 +48,13 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: AppPaddings.all16,
         child: ListView(children: [
-          SearchbarWithFilter(
-            onSearch: (query) {
+          SearchbarWithFilter(onSearch: (query) {
             final movieCubit = context.read<MovieCubit>();
             movieCubit.searchMovies(query);
-            Navigate.to(context, SearchScreen(query: query)).then((_) {
-                  log('Controller: ${movieCubit.controller.text}');
-                  movieCubit.resetInput();
-                  movieCubit.getMovies();
-                  log('in home screen'); 
-                });
+            Navigate.to(context, const SearchScreen()).then((_) {
+              movieCubit.resetInput();
+              movieCubit.getMovies();
+            });
           }),
           AppSizedboxes.h20,
           const CategoryList(),
@@ -69,21 +64,25 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {},
           ),
           AppSizedboxes.h20,
-          const BannerSlider(),
+          const BannerSlider(isTrending: true),
           AppSizedboxes.h25,
           GlobalSectionHeadlines(
             heading: AppStrings.trending,
             onPressed: () {},
           ),
           AppSizedboxes.h20,
-          const MovieList(),
+          const MovieList(
+            isTrending: true,
+          ),
           AppSizedboxes.h25,
           GlobalSectionHeadlines(
-            heading: AppStrings.comingSoon,
+            heading: AppStrings.mostViewed,
             onPressed: () {},
           ),
           AppSizedboxes.h20,
-          const MovieList(),
+          const MovieList(
+            isTrending: false,
+          ),
           AppSizedboxes.h25
         ]),
       ),

@@ -130,6 +130,34 @@ const movies_controller = {
       res.status(500).send({ error: error.message });
     }
   },
+  getTrendingMovies: async (req, res) => {
+    try {
+      const trendingMovies = await MovieModel.find()
+        .populate('genres')
+        .populate('actors')
+        .populate('ratings')
+        .sort({
+          year: -1,     // Sort by recent release date in descending order
+          'ratings.average': -1, // Optionally sort by average rating (descending)
+        })
+        .limit(10); 
+
+      if (trendingMovies.length > 0) {
+        res.status(200).send({
+          message: "success",
+          data: trendingMovies,
+        });
+      } else {
+        res.status(204).send({
+          message: "No trending movies found",
+          data: null,
+        });
+      }
+    } catch (error) {
+      res.status(500).send({ error: error.message });
+    }
+  },
+
 };
 
 module.exports = movies_controller;

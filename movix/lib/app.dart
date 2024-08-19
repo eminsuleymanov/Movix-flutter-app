@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => MovieCubit()..getMovies()),
+          BlocProvider(create: (context) => MovieCubit()..getMovies()..getTrendingMovies()),
           BlocProvider(create: (context) => CategoryCubit()..getCategories()),
         ],
         child: MaterialApp(

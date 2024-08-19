@@ -29,10 +29,10 @@ class CategoryCubit extends Cubit<CategoryState> {
     }
   }
 
-  void selectCategory(int index) {
+  void selectCategory(String id) {
     if (state is CategorySuccess) {
       final successState = state as CategorySuccess;
-      emit(CategorySuccess(successState.categories, selectedIndex: index));
+      emit(CategorySuccess(successState.categories, selectedIndex: id));
     }
   }
 }
