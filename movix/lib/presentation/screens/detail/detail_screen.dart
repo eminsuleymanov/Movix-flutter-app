@@ -74,7 +74,7 @@ class DetailScreen extends StatelessWidget {
                     AppSizedboxes.h20,
                     ActorList(actors: movie.actors),
                     AppSizedboxes.h20,
-                    DetailActions(trailerUrl: movie.videoUrl,)
+                    DetailActions(trailerUrl: movie.videoUrl,movie: movie,)
                   ],
                 ),
               ),

@@ -33,6 +33,7 @@ class HomeScreen extends StatelessWidget {
           centerTitle: false,
           toolbarHeight: 80.h,
           actions: [
+            
             Padding(
               padding: AppPaddings.r16,
               child: CircleAvatar(

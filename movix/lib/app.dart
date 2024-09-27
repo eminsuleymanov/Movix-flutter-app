@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movix/cubits/wishlist/wishlist_cubit.dart';
 
 import 'cubits/category/cubit/category_cubit.dart';
 import 'cubits/movie/cubit/movie_cubit.dart';
@@ -18,6 +19,7 @@ class App extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => MovieCubit()..getMovies()..getTrendingMovies()),
           BlocProvider(create: (context) => CategoryCubit()..getCategories()),
+          BlocProvider(create: (context)=> WishlistCubit())
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
