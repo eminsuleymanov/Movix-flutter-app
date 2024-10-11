@@ -36,4 +36,8 @@ class AppStrings {
   /// Wishlist
   static const String wishlist = 'Wishlist';
 
+  /// Navigation bar
+  static const String home = 'Home';
+  static const String profile = 'Profile';
+
 }

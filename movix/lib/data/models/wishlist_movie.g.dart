@@ -20,15 +20,16 @@ class WishlistMovieAdapter extends TypeAdapter<WishlistMovie> {
       id: fields[0] as String,
       title: fields[1] as String,
       country: fields[2] as String,
-      genres: (fields[3] as List).cast<String>(),
+      genres: (fields[3] as List<String>),
       rated: fields[4] as String,
+      poster: fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, WishlistMovie obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class WishlistMovieAdapter extends TypeAdapter<WishlistMovie> {
       ..writeByte(3)
       ..write(obj.genres)
       ..writeByte(4)
-      ..write(obj.rated);
+      ..write(obj.rated)
+      ..writeByte(5)
+      ..write(obj.poster);
   }
 
   @override

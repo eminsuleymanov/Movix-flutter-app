@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../core/routes/generator.dart';
 import '../../../cubits/movie/cubit/movie_cubit.dart';
 import '../../../utils/constants/app_colors.dart';
@@ -33,7 +32,6 @@ class HomeScreen extends StatelessWidget {
           centerTitle: false,
           toolbarHeight: 80.h,
           actions: [
-            
             Padding(
               padding: AppPaddings.r16,
               child: CircleAvatar(

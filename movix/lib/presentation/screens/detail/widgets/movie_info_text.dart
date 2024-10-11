@@ -17,7 +17,7 @@ class MovieInfoText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "$year, ${genres.map((e) => e.name).join('/')} , $runtime min",
+      "$year, ${genres.join('/')} , $runtime min",
       style: AppTxtStyles.montRegWhite14,
     );
   }

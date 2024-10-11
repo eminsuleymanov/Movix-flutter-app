@@ -2,9 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../../../data/models/movie.dart';
+
 import '../../../utils/constants/app_strings.dart';
 import '../../data/models/wishlist_movie.dart';
+import '../../utils/interfaces/movie_interface.dart';
 
 part 'wishlist_state.dart';
 
@@ -18,7 +19,7 @@ class WishlistCubit extends Cubit<WishlistState> {
     return wishlistBox.containsKey(movieId);
   }
 
-  void toggleWishlist(MovieResponse movie) {
+  void toggleWishlist(Movie movie) {
     try {
       emit(WishlistLoading());
 

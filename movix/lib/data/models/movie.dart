@@ -1,17 +1,25 @@
-class MovieResponse {
+import '../../utils/interfaces/movie_interface.dart';
+
+class MovieResponse implements Movie {
+  @override
   final String id;
+  @override
   final String title;
   final int year;
+  @override
   final String rated;
   final DateTime released;
   final int runtime;
   final String type;
-  final List<Genre> genres;
+  @override
+  final List<String> genres;
   final List<Actor> actors;
   final String director;
   final String plot;
   final List<String> language;
+  @override
   final String country;
+  @override
   final String poster;
   final String videoUrl;
   final List<Rating> ratings;
@@ -43,18 +51,21 @@ class MovieResponse {
       title: json['title'] ?? '',
       year: json['year'] ?? 0,
       rated: json['rated'] ?? '',
-      released: json['released'] != null ? DateTime.parse(json['released']) : DateTime.now(),
+      released: json['released'] != null
+          ? DateTime.parse(json['released'])
+          : DateTime.now(),
       runtime: json['runtime'] ?? 0,
       type: json['type'] ?? '',
       genres: json['genres'] != null
-          ? (json['genres'] as List).map((e) => Genre.fromJson(e)).toList()
+          ? (json['genres'] as List).map((e) => e['name'] as String).toList()
           : [],
       actors: json['actors'] != null
           ? (json['actors'] as List).map((e) => Actor.fromJson(e)).toList()
           : [],
       director: json['director'] ?? '',
       plot: json['plot'] ?? '',
-      language: json['language'] != null ? List<String>.from(json['language']) : [],
+      language:
+          json['language'] != null ? List<String>.from(json['language']) : [],
       country: json['country'] ?? '',
       poster: json['poster'] ?? '',
       videoUrl: json['videoUrl'] ?? '',
@@ -64,30 +75,6 @@ class MovieResponse {
       boxOffice: json['boxOffice'] ?? '',
     );
   }
-
-  
-}
-
-class Genre {
-  final String id;
-  final String name;
-  final List<String> movies;
-
-  Genre({
-    required this.id,
-    required this.name,
-    required this.movies,
-  });
-
-  factory Genre.fromJson(Map<String, dynamic> json) {
-    return Genre(
-      id: json['_id'] ?? '',
-      name: json['name'] ?? '',
-      movies: json['movies'] != null ? List<String>.from(json['movies']) : [],
-    );
-  }
-
-  
 }
 
 class Actor {
@@ -111,8 +98,6 @@ class Actor {
       movies: json['movies'] != null ? List<String>.from(json['movies']) : [],
     );
   }
-
-  
 }
 
 class Rating {
@@ -133,6 +118,4 @@ class Rating {
       value: json['value'] ?? '',
     );
   }
-
-  
 }

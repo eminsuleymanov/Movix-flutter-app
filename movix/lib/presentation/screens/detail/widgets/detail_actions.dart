@@ -3,10 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import '../../../../cubits/wishlist/wishlist_cubit.dart';
-import '../../../../data/models/movie.dart';
 import '../../../../utils/constants/app_sizedboxes.dart';
 import '../../../../utils/constants/app_strings.dart';
+import '../../../../utils/interfaces/movie_interface.dart';
 import 'detail_action_btn.dart';
 import 'movie_trailer_dialog.dart';
 
@@ -18,7 +19,7 @@ class DetailActions extends StatelessWidget {
   });
 
   final String trailerUrl;
-  final MovieResponse movie;
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:movix/data/models/movie.dart';
+import 'package:movix/utils/constants/app_paddings.dart';
 
 import '../../../cubits/wishlist/wishlist_cubit.dart';
 import '../../../data/models/wishlist_movie.dart';
+import '../../../utils/constants/app_colors.dart';
+import '../../../utils/constants/app_sizedboxes.dart';
 import '../../../utils/constants/app_strings.dart';
 import '../../../utils/constants/app_txt_styles.dart';
 import '../../widgets/movie_list_tile.dart';
@@ -18,27 +20,32 @@ class WishlistScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.backgroundPrimary,
         title: Text(
           AppStrings.wishlist,
           style: AppTxtStyles.monts20white500,
         ),
       ),
-      body: ValueListenableBuilder(
-        valueListenable: wishlistCubit.wishlistBox.listenable(),
-        builder: (context, Box<WishlistMovie> box, _) {
-          final wishlistMovies = box.values.toList();
-
-          if (wishlistMovies.isEmpty) {
-            return const Center(child: Text('Your wishlist is empty.'));
-          }
-          return ListView.builder(
-            itemCount: wishlistMovies.length,
-            itemBuilder: (context, index) {
-              final movie = wishlistMovies[index];
-              return MovieListTile(movie: movie as MovieResponse);
-            },
-          );
-        },
+      body: Padding(
+        padding: AppPaddings.all10,
+        child: ValueListenableBuilder(
+          valueListenable: wishlistCubit.wishlistBox.listenable(),
+          builder: (context, Box<WishlistMovie> box, _) {
+            final wishlistMovies = box.values.toList();
+        
+            if (wishlistMovies.isEmpty) {
+              return Center(child: Text('Your wishlist is empty.',style: AppTxtStyles.monts20white500,));
+            }
+            return ListView.separated(
+              itemCount: wishlistMovies.length,
+              separatorBuilder: (_, i) => AppSizedboxes.h6,
+              itemBuilder: (context, index) {
+                final movie = wishlistMovies[index];
+                return MovieListTile(movie: movie );
+              },
+            );
+          },
+        ),
       ),
     );
   }

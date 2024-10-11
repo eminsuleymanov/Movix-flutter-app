@@ -1,24 +1,34 @@
 import 'package:hive/hive.dart';
-import 'movie.dart';
+
+import '../../utils/interfaces/movie_interface.dart';
 
 part 'wishlist_movie.g.dart';
 
-@HiveType(typeId: 0) 
-class WishlistMovie extends HiveObject {
+@HiveType(typeId: 0)
+class WishlistMovie extends HiveObject implements Movie {
+  @override
   @HiveField(0)
   final String id;
 
+  @override
   @HiveField(1)
   final String title;
 
+  @override
   @HiveField(2)
   final String country;
 
+  @override
   @HiveField(3)
-  final List<String> genres;  // Change this to List<String>
+  final List<String> genres;
 
+  @override
   @HiveField(4)
   final String rated;
+
+  @override
+  @HiveField(5)
+  final String poster;
 
   WishlistMovie({
     required this.id,
@@ -26,15 +36,17 @@ class WishlistMovie extends HiveObject {
     required this.country,
     required this.genres,
     required this.rated,
+    required this.poster,
   });
 
-  factory WishlistMovie.fromMovieResponse(MovieResponse movie) {
+  factory WishlistMovie.fromMovieResponse(Movie movie) {
     return WishlistMovie(
       id: movie.id,
       title: movie.title,
       country: movie.country,
-      genres: movie.genres.map((genre) => genre.name).toList(),  // Keep this as List<String>
-      rated: movie.rated,  
+      genres: movie.genres,
+      rated: movie.rated,
+      poster: movie.poster,
     );
   }
 }

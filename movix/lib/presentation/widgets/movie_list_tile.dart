@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movix/data/models/movie.dart';
-import 'package:movix/utils/constants/app_colors.dart';
-import 'package:movix/utils/constants/app_paddings.dart';
-import 'package:movix/utils/constants/app_sizedboxes.dart';
-import 'package:movix/utils/constants/app_txt_styles.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movix/cubits/wishlist/wishlist_cubit.dart';
+
+import '../../utils/constants/app_colors.dart';
+import '../../utils/constants/app_paddings.dart';
+import '../../utils/constants/app_sizedboxes.dart';
+import '../../utils/constants/app_txt_styles.dart';
+import '../../utils/interfaces/movie_interface.dart';
 
 class MovieListTile extends StatelessWidget {
   const MovieListTile({
@@ -12,10 +16,12 @@ class MovieListTile extends StatelessWidget {
     required this.movie,
   });
 
-  final MovieResponse movie;
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
+    final wishlistCubit = context.read<WishlistCubit>();
+    final isInWishlist = wishlistCubit.isInWishlist(movie.id);
     return ClipRRect(
       borderRadius: BorderRadius.circular(12.0),
       child: ColoredBox(
@@ -35,30 +41,51 @@ class MovieListTile extends StatelessWidget {
               ),
               AppSizedboxes.w16,
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      movie.title,
-                      style: AppTxtStyles.montserratRegularWhite16,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            movie.title,
+                            style: AppTxtStyles.montserratRegularWhite16,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          AppSizedboxes.h6,
+                          Text(
+                            movie.country,
+                            style: AppTxtStyles.montserratRegularGray,
+                          ),
+                          AppSizedboxes.h6,
+                          Text(
+                            movie.genres.join(', '),
+                            style: AppTxtStyles.montserratRegularBlue,
+                          ),
+                          AppSizedboxes.h6,
+                          Text(
+                            movie.rated,
+                            style: AppTxtStyles.montRegWhite14,
+                          ),
+                        ],
+                      ),
                     ),
-                    AppSizedboxes.h6,
-                    Text(
-                      movie.country,
-                      style: AppTxtStyles.montserratRegularGray,
-                    ),
-                    AppSizedboxes.h6,
-                    Text(
-                      movie.genres.map((e) => e.name).join(', '),
-                      style: AppTxtStyles.montserratRegularBlue,
-                    ),
-                    AppSizedboxes.h6,
-                    Text(
-                      movie.rated,
-                      style: AppTxtStyles.montRegWhite14,
-                    ),
+                    IconButton(
+                      onPressed: () {
+                        wishlistCubit.toggleWishlist(movie );
+                      },
+                      color: AppColors.yellow,
+                      icon: Icon(
+                        isInWishlist
+                    ? FontAwesomeIcons.solidHeart
+                    : FontAwesomeIcons.heart,
+                        size: 20, 
+                      ),
+                      visualDensity: VisualDensity.compact,
+                    )
                   ],
                 ),
               ),
