@@ -40,4 +40,9 @@ class AppStrings {
   static const String home = 'Home';
   static const String profile = 'Profile';
 
+  /// Profile 
+  static const String editProfile = 'Edit Profile';
+  static const String changeLanguage = 'Change language';
+  static const String logout = 'Log out';
+
 }

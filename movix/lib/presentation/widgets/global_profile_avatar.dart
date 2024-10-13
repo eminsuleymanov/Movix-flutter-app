@@ -24,10 +24,10 @@ class GlobalProfileAvatar extends StatelessWidget {
               height: 100.h,
             ),
           ),
+          
           Positioned(
             bottom: -10,
             child: Container(
-              // alignment: Alignment.center,
               decoration: const BoxDecoration(
                 color: AppColors.white,
                 shape: BoxShape.circle,
