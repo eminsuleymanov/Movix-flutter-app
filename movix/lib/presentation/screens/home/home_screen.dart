@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../core/routes/generator.dart';
 import '../../../cubits/movie/cubit/movie_cubit.dart';
 import '../../../utils/constants/app_colors.dart';
@@ -16,6 +17,7 @@ import '../search/widgets/searchbar_with_filter.dart';
 import 'widgets/bannerSlider/banner_slider.dart';
 import 'widgets/category_list.dart';
 import 'widgets/movie_list.dart';
+import 'widgets/viewAll/view_all_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -60,14 +62,14 @@ class HomeScreen extends StatelessWidget {
           AppSizedboxes.h25,
           GlobalSectionHeadlines(
             heading: AppStrings.nowPlaying,
-            onPressed: () {},
+            onPressed: () => Navigate.to(context, const ViewAllScreen()),
           ),
           AppSizedboxes.h20,
           const BannerSlider(isTrending: true),
           AppSizedboxes.h25,
           GlobalSectionHeadlines(
             heading: AppStrings.trending,
-            onPressed: () {},
+            onPressed: () => Navigate.to(context, const ViewAllScreen()),
           ),
           AppSizedboxes.h20,
           const MovieList(
@@ -76,7 +78,7 @@ class HomeScreen extends StatelessWidget {
           AppSizedboxes.h25,
           GlobalSectionHeadlines(
             heading: AppStrings.mostViewed,
-            onPressed: () {},
+            onPressed: () => Navigate.to(context, const ViewAllScreen()),
           ),
           AppSizedboxes.h20,
           const MovieList(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movix/presentation/widgets/global_input.dart';
+import '../../../../../widgets/global_input.dart';
+import '../../../../../../utils/constants/app_strings.dart';
 
 class LoginPasswordInput extends StatelessWidget {
 
@@ -7,6 +8,6 @@ class LoginPasswordInput extends StatelessWidget {
 
    @override
    Widget build(BuildContext context) {
-       return const GlobalInput(isSecure: true,label: "Password", );
+       return const GlobalInput(isSecure: true,label: AppStrings.password, );
   }
 }

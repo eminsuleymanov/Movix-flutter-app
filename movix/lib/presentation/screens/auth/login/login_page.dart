@@ -37,18 +37,12 @@ class LoginPage extends StatelessWidget {
               AppStrings.welcomeBack,
               style: AppTxtStyles.montserrat500white,
             ),
-            SizedBox(
-              height: 20.h,
-            ),
+            20.verticalSpace,
             const LoginEmailInput(),
-            SizedBox(
-              height: 28.h,
-            ),
+            28.verticalSpace,
             const LoginPasswordInput(),
             const ForgotPasswordTxt(),
-            SizedBox(
-              height: 34.h,
-            ),
+            34.verticalSpace,
             const Center(
               child: GlobalButton(
                 text: AppStrings.login,
@@ -60,9 +54,7 @@ class LoginPage extends StatelessWidget {
               blueTxt: AppStrings.signUp,
               onPressed: () => Navigate.to(context, const RegisterPage()),
             ),
-            SizedBox(
-              height: 26.h,
-            ),
+            26.verticalSpace,
             const LogViaSocial()
           ],
         ),

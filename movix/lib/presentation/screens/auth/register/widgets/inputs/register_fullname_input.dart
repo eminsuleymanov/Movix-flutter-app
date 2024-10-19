@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../utils/constants/app_strings.dart';
 import '../../../../../widgets/global_input.dart';
 
 class RegisterFullnameInput extends StatelessWidget {
@@ -8,6 +9,6 @@ class RegisterFullnameInput extends StatelessWidget {
 
    @override
    Widget build(BuildContext context) {
-       return const GlobalInput(label: "Full name", isSecure: false, prefixIcon: null,);
+       return const GlobalInput(label: AppStrings.fullName, isSecure: false, prefixIcon: null,);
   }
 }

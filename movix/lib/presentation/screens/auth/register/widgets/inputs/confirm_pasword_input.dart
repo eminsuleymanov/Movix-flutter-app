@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../utils/constants/app_strings.dart';
 import '../../../../../widgets/global_input.dart';
 
 class ConfirmPaswordInput extends StatelessWidget {
@@ -8,6 +9,6 @@ class ConfirmPaswordInput extends StatelessWidget {
 
    @override
    Widget build(BuildContext context) {
-       return const GlobalInput(isSecure: true,label: "Confirm Password", );
+       return const GlobalInput(isSecure: true,label: AppStrings.confirmPassword, );
   }
 }

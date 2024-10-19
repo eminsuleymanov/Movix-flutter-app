@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ViewAllScreen extends StatelessWidget {
+class UpdateProfileButton extends StatelessWidget {
 
-  const ViewAllScreen({ super.key });
+  const UpdateProfileButton({ super.key });
 
    @override
    Widget build(BuildContext context) {

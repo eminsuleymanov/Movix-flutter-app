@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../core/routes/generator.dart';
 import '../../../../utils/constants/app_strings.dart';
 import '../../../widgets/dotted_divider.dart';
+import '../../change_language/change_lang_screen.dart';
+import '../../edit/edit_profile_screen.dart';
+import '../../policy/policy_screen.dart';
 import 'profile_tile.dart';
 
 class ProfileSettings extends StatelessWidget {
@@ -13,14 +18,19 @@ class ProfileSettings extends StatelessWidget {
       {
         'icon': Icons.person,
         'title': AppStrings.editProfile,
-        'onTap': () {},
+        'onTap': () => Navigate.to(context, const EditProfileScreen())
       },
       {
         'icon': Icons.g_translate_rounded,
         'title': AppStrings.changeLanguage,
-        'onTap': () {}
+        'onTap': () => Navigate.to(context, const ChangeLangScreen())
       },
-       {
+      {
+        'icon': FontAwesomeIcons.fileShield,
+        'title': AppStrings.policy,
+        'onTap': () => Navigate.to(context, const PolicyScreen())
+      },
+      {
         'icon': Icons.logout_rounded,
         'title': AppStrings.logout,
         'onTap': () {}
