@@ -6,18 +6,19 @@ import '../../../core/routes/generator.dart';
 import '../../../utils/constants/assets_paths.dart';
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
-  const SplashScreen({ super.key });
-
-   @override
-   Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigate.to(context, const OnboardScreen());
+      if (context.mounted) {
+        Navigate.replace(context, const OnboardScreen());
+      }
     });
-       return Scaffold(
-           body: Center(
-            child: SvgPicture.asset(AssetsPaths.appLogo),
-           ),
-       );
+    return Scaffold(
+      body: Center(
+        child: SvgPicture.asset(AssetsPaths.appLogo),
+      ),
+    );
   }
 }

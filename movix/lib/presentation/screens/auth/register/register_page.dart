@@ -61,7 +61,7 @@ class RegisterPage extends StatelessWidget {
                 ),
                 const Center(
                   child: GlobalButton(
-                    text: AppStrings.signIn,
+                    text: AppStrings.signUp,
                     color: AppColors.purple,
                   ),
                 ),

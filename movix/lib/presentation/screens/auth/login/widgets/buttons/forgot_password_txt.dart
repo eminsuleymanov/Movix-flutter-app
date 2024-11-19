@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/routes/generator.dart';
 import '../../../../../../utils/constants/app_strings.dart';
 import '../../../../../../utils/constants/app_txt_styles.dart';
+import '../../../../reset_password/reset_screen.dart';
 
 class ForgotPasswordTxt extends StatelessWidget {
   const ForgotPasswordTxt({super.key});
@@ -12,9 +14,8 @@ class ForgotPasswordTxt extends StatelessWidget {
       child: Text(
         AppStrings.forgotPassword,
         style: AppTxtStyles.montserratRegularWhite16,
-        // textAlign: TextAlign.end,
       ),
-      onPressed: () {},
+      onPressed: ()=> Navigate.to(context, const ResetScreen()),
     );
   }
 }

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movix/core/routes/generator.dart';
-import 'package:movix/presentation/screens/auth/widgets/auth_mini_links.dart';
-import 'package:movix/presentation/widgets/global_button.dart';
-import 'package:movix/utils/constants/app_colors.dart';
-import 'package:movix/utils/constants/app_paddings.dart';
-import 'package:movix/utils/constants/app_strings.dart';
-import 'package:movix/utils/constants/app_txt_styles.dart';
-import 'package:movix/utils/constants/assets_paths.dart';
+import 'package:movix/utils/constants/app_sizedboxes.dart';
 
+import '../../../core/routes/generator.dart';
+import '../../../utils/constants/app_colors.dart';
+import '../../../utils/constants/app_paddings.dart';
+import '../../../utils/constants/app_strings.dart';
+import '../../../utils/constants/app_txt_styles.dart';
+import '../../../utils/constants/assets_paths.dart';
+import '../../widgets/global_button.dart';
 import '../auth/login/login_page.dart';
+import '../auth/register/register_page.dart';
+import '../auth/widgets/auth_mini_links.dart';
 
 class OnboardScreen extends StatelessWidget {
   const OnboardScreen({super.key});
@@ -29,28 +31,30 @@ class OnboardScreen extends StatelessWidget {
               width: 220.w,
               height: 220.h,
             ),
-            SizedBox(height: 20.h),
+            AppSizedboxes.h20,
             Text(
               AppStrings.newExperience,
               style: AppTxtStyles.montserrat500white,
             ),
-            SizedBox(height: 20.h),
+            AppSizedboxes.h20,
             Text(
               AppStrings.onboardGreytxt,
               style: AppTxtStyles.montserrat300Grey,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
-              height: 60.h,
-            ),
+            AppSizedboxes.h60,
             GlobalButton(
-              onTap: () {},
+              onTap: () => Navigate.to(context, const RegisterPage()),
               text: AppStrings.getStarted,
               gradientColor1: AppColors.lightBlueGradient1,
               gradientColor2: AppColors.lightBlueGradient2,
             ),
-            SizedBox(height: 10.h,),
-            AuthMiniLinks(grayTxt: AppStrings.alreadyHaveAcc,blueTxt: AppStrings.signIn,onPressed: () => Navigate.to(context, const LoginPage()),),
+            AppSizedboxes.h10,
+            AuthMiniLinks(
+              grayTxt: AppStrings.alreadyHaveAcc,
+              blueTxt: AppStrings.signIn,
+              onPressed: () => Navigate.replace(context, const LoginPage()),
+            ),
           ],
         ),
       ),

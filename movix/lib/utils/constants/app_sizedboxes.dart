@@ -12,8 +12,10 @@ class AppSizedboxes {
   
   static SizedBox h4 = SizedBox(height: 4.h);
   static SizedBox h6 = SizedBox(height: 6.h);
+  static SizedBox h10 = SizedBox(height: 6.h);
   static SizedBox h16 = SizedBox(height: 16.h);
   static SizedBox h20 = SizedBox(height: 20.h);
   static SizedBox h25 = SizedBox(height: 25.h);
   static SizedBox h45 = SizedBox(height: 45.h);
+  static SizedBox h60 = SizedBox(height: 60.h);
 }

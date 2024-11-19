@@ -11,6 +11,8 @@ class AppStrings {
   static const String fullName = "Full name";
   static const String password = "Password";
   static const String confirmPassword = "Confirm Password";
+  static const String resetPassword = "Reset Password";
+  static const String sendLink = "Send link";
 
   //// LOGIN
   static const String welcomeBack = "Welcome Back,\n Movie Lover!";
