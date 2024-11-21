@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movix/cubits/login/cubit/login_cubit.dart';
 
 import '../../../../core/routes/generator.dart';
 import '../../../../utils/constants/app_strings.dart';
@@ -33,7 +35,7 @@ class ProfileSettings extends StatelessWidget {
       {
         'icon': Icons.logout_rounded,
         'title': AppStrings.logout,
-        'onTap': () {}
+        'onTap': ()=> context.read<LoginCubit>().signOut()
       },
     ];
     return Expanded(

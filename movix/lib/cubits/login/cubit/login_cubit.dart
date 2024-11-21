@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,11 +11,11 @@ class LoginCubit extends Cubit<LoginState> {
 
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
-  final TextEditingController resetPassword = TextEditingController();
+  final TextEditingController resetPasswordController = TextEditingController();
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  Future<void> signin() async {
+  Future<void> signIn() async {
     if (email.text.isEmpty || password.text.isEmpty) {
       emit(LoginError('Please fill in all fields.'));
       return;
@@ -24,39 +26,62 @@ class LoginCubit extends Cubit<LoginState> {
         email: email.text.trim(),
         password: password.text.trim(),
       );
-      emit(LoginSuccess(userCredential.user));
+      emit(LoginSuccess(
+          user: userCredential.user,
+          message: "${email.text} has successfully logged in"));
     } on FirebaseAuthException catch (e) {
-      emit(LoginError(e.message ?? 'An unknown error occurred.'));
+      if (e.code == 'invalid-email') {
+        emit(LoginError('An Invalid email format'));
+        log('Firebase Authentication Exception: ${e.code}/////////////');
+      } else if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        emit(LoginError('Email or password is incorrect'));
+        log('Firebase Authentication Exception: ${e.code}/////////////');
+      }
+      // emit(LoginError(e.message ?? 'An unknown error occurred.'));
     } catch (e) {
       emit(LoginError('Something went wrong. Please try again.'));
     }
   }
 
-  Future<void> reset() async {
-    if (resetPassword.text.isEmpty) {
-      emit(LoginError('Please fill in all fields.'));
+  Future<void> resetPassword() async {
+    final email = resetPasswordController.text.trim();
+
+    if (email.isEmpty) {
+      emit(ResetPasswordError('Please enter an email.'));
       return;
     }
 
     try {
-      final signInMethods = await FirebaseAuth.instance
-          .fetchSignInMethodsForEmail(resetPassword.text.trim());
-
-      if (signInMethods.isEmpty) {
-        emit(LoginError(
-            'This email is not authorized. Please check the email address.'));
-      } else {
-        await _firebaseAuth.sendPasswordResetEmail(email: resetPassword.text);
-      }
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      emit(ResetPasswordSuccess('Password reset email sent successfully.'));
+      
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'invalid-email') {
-        emit(LoginError(
-            'The email address is invalid. Please enter a valid email.'));
-      } else {
-        emit(LoginError('An error occurred: ${e.message}'));
+      if (e.code == 'user-not-found') {
+        emit(ResetPasswordError('No account found with this email.'));
+      } else if(e.code == 'invalid-email'){
+        emit(ResetPasswordError('Failed to send reset email: ${e.message}'));
       }
     } catch (e) {
-      emit(LoginError('An unexpected error occurred. Please try again.'));
+      emit(ResetPasswordError('An unexpected error occurred.'));
     }
   }
+
+  Future<void> signOut() async {
+    emit(LoginLoading());
+    try {
+      await _firebaseAuth.signOut();
+      emit(LogOut("Logged out successfully"));
+    } catch (e) {
+      emit(LogOutError(e.toString()));
+    }
+  }
+
+  @override
+  Future<void> close() {
+    email.dispose();
+    password.dispose();
+    resetPasswordController.dispose();
+    return super.close();
+  }
 }
+

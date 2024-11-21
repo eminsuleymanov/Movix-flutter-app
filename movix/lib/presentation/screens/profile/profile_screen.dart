@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movix/core/routes/generator.dart';
+import 'package:movix/cubits/login/cubit/login_cubit.dart';
+import 'package:movix/presentation/screens/auth/login/login_page.dart';
+import 'package:movix/presentation/widgets/global_snackbar.dart';
 
 import '../../../utils/constants/app_colors.dart';
 import '../../../utils/constants/app_sizedboxes.dart';
@@ -21,17 +26,31 @@ class ProfileScreen extends StatelessWidget {
           style: AppTxtStyles.montserrat500white,
         ),
       ),
-      body:  Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const GlobalProfileAvatar(),
-          AppSizedboxes.h20,
-          const UserCredentials(),
-          AppSizedboxes.h25,
-          const ProfileSettings()
+      body: BlocConsumer<LoginCubit, LoginState>(
+        listener: (context, state) {
+          if (state is LogOut) {
+            GlobalSnackbar.show(context, state.message,
+                backgroundColor: AppColors.green);
+                Navigate.replace(context, const LoginPage());
+          } else if(state is LogOutError){
+            GlobalSnackbar.show(context, state.message,
+                backgroundColor: AppColors.red);
 
-
-      ],),
+          }
+        },
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const GlobalProfileAvatar(),
+              AppSizedboxes.h20,
+              const UserCredentials(),
+              AppSizedboxes.h25,
+              const ProfileSettings()
+            ],
+          );
+        },
+      ),
     );
   }
 }

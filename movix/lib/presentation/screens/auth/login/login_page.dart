@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movix/core/routes/generator.dart';
-import 'package:movix/cubits/login/cubit/login_cubit.dart';
-import 'package:movix/presentation/screens/auth/login/widgets/buttons/forgot_password_txt.dart';
-import 'package:movix/presentation/screens/auth/login/widgets/buttons/log_via_social.dart';
-import 'package:movix/presentation/screens/auth/login/widgets/inputs/login_email_input.dart';
-import 'package:movix/presentation/screens/auth/login/widgets/inputs/login_password_input.dart';
-import 'package:movix/presentation/screens/auth/register/register_page.dart';
-import 'package:movix/presentation/screens/auth/widgets/auth_mini_links.dart';
-import 'package:movix/presentation/screens/home/home_screen.dart';
-import 'package:movix/presentation/widgets/global_button.dart';
-import 'package:movix/utils/constants/app_colors.dart';
-import 'package:movix/utils/constants/app_paddings.dart';
-import 'package:movix/utils/constants/app_strings.dart';
-import 'package:movix/utils/constants/app_txt_styles.dart';
-import 'package:movix/utils/constants/assets_paths.dart';
+
+import '../../../../core/routes/generator.dart';
+import '../../../../cubits/login/cubit/login_cubit.dart';
+import '../../../../utils/constants/app_colors.dart';
+import '../../../../utils/constants/app_paddings.dart';
+import '../../../../utils/constants/app_strings.dart';
+import '../../../../utils/constants/app_txt_styles.dart';
+import '../../../../utils/constants/assets_paths.dart';
+import '../../../widgets/global_button.dart';
+import '../../../widgets/global_snackbar.dart';
+import '../../home/home_view.dart';
+import '../register/register_page.dart';
+import '../widgets/auth_mini_links.dart';
+import 'widgets/buttons/forgot_password_txt.dart';
+import 'widgets/buttons/log_via_social.dart';
+import 'widgets/inputs/login_email_input.dart';
+import 'widgets/inputs/login_password_input.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -29,10 +31,16 @@ class LoginPage extends StatelessWidget {
         child: BlocConsumer<LoginCubit, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
-              Navigate.replace(context, const HomeScreen());
-            } else if(state is LoginError){
-              ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(state.error)));
+              GlobalSnackbar.show(context, state.message!,
+                  backgroundColor: AppColors.green);
+              Future.delayed(const Duration(milliseconds: 1700), () {
+                if (context.mounted) {
+                  Navigate.replace(context, const HomeView());
+                }
+              });
+            } else if (state is LoginError) {
+              GlobalSnackbar.show(context, state.error,
+                  backgroundColor: AppColors.red);
             }
           },
           builder: (context, state) {
@@ -57,15 +65,15 @@ class LoginPage extends StatelessWidget {
                 const ForgotPasswordTxt(),
                 34.verticalSpace,
                 if (state is LoginLoading)
-                    const Center(child: CircularProgressIndicator())
-                  else
-                    Center(
-                  child: GlobalButton(
-                    text: AppStrings.login,
-                    color: AppColors.purple,
-                    onTap: context.read<LoginCubit>().signin,
+                  const Center(child: CircularProgressIndicator())
+                else
+                  Center(
+                    child: GlobalButton(
+                      text: AppStrings.login,
+                      color: AppColors.purple,
+                      onTap: context.read<LoginCubit>().signIn,
+                    ),
                   ),
-                ),
                 AuthMiniLinks(
                   grayTxt: AppStrings.createNewAcc,
                   blueTxt: AppStrings.signUp,
