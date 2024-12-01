@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movix/core/routes/generator.dart';
-import 'package:movix/cubits/login/cubit/login_cubit.dart';
-import 'package:movix/presentation/screens/auth/login/login_page.dart';
-import 'package:movix/presentation/widgets/global_snackbar.dart';
 
+import '../../../core/routes/generator.dart';
+
+import '../../../cubits/user/user_cubit.dart';
 import '../../../utils/constants/app_colors.dart';
 import '../../../utils/constants/app_sizedboxes.dart';
 import '../../../utils/constants/app_strings.dart';
 import '../../../utils/constants/app_txt_styles.dart';
 import '../../widgets/global_profile_avatar.dart';
+import '../../widgets/global_snackbar.dart';
+import '../auth/login/login_page.dart';
 import 'widgets/profile_settings.dart';
 import 'widgets/user_credentials.dart';
 
@@ -26,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
           style: AppTxtStyles.montserrat500white,
         ),
       ),
-      body: BlocConsumer<LoginCubit, LoginState>(
+      body: BlocConsumer<UserCubit, UserState>(
         listener: (context, state) {
           if (state is LogOut) {
             GlobalSnackbar.show(context, state.message,

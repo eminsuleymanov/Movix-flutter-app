@@ -1,21 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:movix/utils/constants/app_sizedboxes.dart';
-import 'package:movix/utils/constants/app_txt_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../cubits/user/user_cubit.dart';
+import '../../../../utils/constants/app_sizedboxes.dart';
+import '../../../../utils/constants/app_txt_styles.dart';
 
 class UserCredentials extends StatelessWidget {
   const UserCredentials({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'Arya Wijaya',
-          style: AppTxtStyles.montserrat300Grey,
-        ),
-        AppSizedboxes.h16,
-        Text('Awekadesign@gmail.com',style: AppTxtStyles.montRegWhite14,)
-      ],
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        if (state is UserSuccess) {
+          final user = state.user!;
+          return Column(
+            children: [
+              Text(
+                user.displayName!,
+                style: AppTxtStyles.montserrat300Grey,
+              ),
+              AppSizedboxes.h16,
+              Text(
+                user.email!,
+                style: AppTxtStyles.montRegWhite14,
+              ),
+            ],
+          );
+        } else if (state is UserLoading) {
+          return const CircularProgressIndicator.adaptive();
+        } else if (state is UserError) {
+          return Text(state.error);
+        }
+        else{
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

@@ -30,10 +30,13 @@ class LoginPage extends StatelessWidget {
         padding: AppPaddings.all16,
         child: BlocConsumer<LoginCubit, LoginState>(
           listener: (context, state) {
-            if (state is LoginSuccess) {
+            if(state is LoginLoading){
+               const CircularProgressIndicator.adaptive();
+            }
+            else if (state is LoginSuccess) {
               GlobalSnackbar.show(context, state.message!,
                   backgroundColor: AppColors.green);
-              Future.delayed(const Duration(milliseconds: 1700), () {
+              Future.delayed(const Duration(milliseconds: 1200), () {
                 if (context.mounted) {
                   Navigate.replace(context, const HomeView());
                 }

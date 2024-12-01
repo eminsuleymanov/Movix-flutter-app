@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movix/cubits/login/cubit/login_cubit.dart';
 
 import '../../../../core/routes/generator.dart';
+import '../../../../cubits/user/user_cubit.dart';
 import '../../../../utils/constants/app_strings.dart';
 import '../../../widgets/dotted_divider.dart';
+import '../../auth/login/login_page.dart';
 import '../../change_language/change_lang_screen.dart';
 import '../../edit/edit_profile_screen.dart';
 import '../../policy/policy_screen.dart';
@@ -13,9 +14,9 @@ import 'profile_tile.dart';
 
 class ProfileSettings extends StatelessWidget {
   const ProfileSettings({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final userCubit = context.read<UserCubit>();
     final List<Map<String, dynamic>> profileItems = [
       {
         'icon': Icons.person,
@@ -35,7 +36,12 @@ class ProfileSettings extends StatelessWidget {
       {
         'icon': Icons.logout_rounded,
         'title': AppStrings.logout,
-        'onTap': ()=> context.read<LoginCubit>().signOut()
+        'onTap': () async {
+          await userCubit.signOut();
+          if (context.mounted) {
+            Navigate.replace(context, const LoginPage());
+          }
+        },
       },
     ];
     return Expanded(

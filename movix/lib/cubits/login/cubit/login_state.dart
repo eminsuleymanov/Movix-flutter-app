@@ -16,6 +16,8 @@ final class LoginError extends LoginState {
   final String error;
   LoginError(this.error);
 }
+
+
 final class ResetPasswordError extends LoginState {
   final String error;
   ResetPasswordError(this.error);

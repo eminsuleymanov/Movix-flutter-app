@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movix/cubits/wishlist/wishlist_cubit.dart';
 
 import 'cubits/category/cubit/category_cubit.dart';
 import 'cubits/login/cubit/login_cubit.dart';
 import 'cubits/movie/cubit/movie_cubit.dart';
-// import 'presentation/screens/home/home_view.dart';
+import 'cubits/register/register_cubit.dart';
+import 'cubits/user/user_cubit.dart';
+import 'cubits/wishlist/wishlist_cubit.dart';
 import 'presentation/screens/splash/splash_screen.dart';
 import 'utils/constants/app_themes.dart';
 
@@ -22,15 +23,14 @@ class App extends StatelessWidget {
           BlocProvider(create: (context) => MovieCubit()..getMovies()..getTrendingMovies()),
           BlocProvider(create: (context) => CategoryCubit()..getCategories()),
           BlocProvider(create: (context)=> WishlistCubit()),
-          BlocProvider(create: (context)=> LoginCubit())
+          BlocProvider(create: (context)=> LoginCubit()),
+          BlocProvider(create: (context)=> RegisterCubit()),
+          BlocProvider(create: (context)=> UserCubit()),
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: AppThemes.appTheme,
-            // home: const HomeView(),
             home: const SplashScreen(),
-            
-            
             )
             
 

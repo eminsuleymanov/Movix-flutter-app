@@ -15,6 +15,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+
   Future<void> signIn() async {
     if (email.text.isEmpty || password.text.isEmpty) {
       emit(LoginError('Please fill in all fields.'));
@@ -29,6 +30,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginSuccess(
           user: userCredential.user,
           message: "${email.text} has successfully logged in"));
+          resetControllers();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
         emit(LoginError('An Invalid email format'));
@@ -37,7 +39,6 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginError('Email or password is incorrect'));
         log('Firebase Authentication Exception: ${e.code}/////////////');
       }
-      // emit(LoginError(e.message ?? 'An unknown error occurred.'));
     } catch (e) {
       emit(LoginError('Something went wrong. Please try again.'));
     }
@@ -66,14 +67,13 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  Future<void> signOut() async {
-    emit(LoginLoading());
-    try {
-      await _firebaseAuth.signOut();
-      emit(LogOut("Logged out successfully"));
-    } catch (e) {
-      emit(LogOutError(e.toString()));
-    }
+
+
+  
+
+  void resetControllers() {
+    email.clear();
+    password.clear();
   }
 
   @override
