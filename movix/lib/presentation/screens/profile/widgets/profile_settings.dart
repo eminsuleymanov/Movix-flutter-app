@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../core/routes/generator.dart';
 import '../../../../cubits/user/user_cubit.dart';
@@ -38,6 +39,7 @@ class ProfileSettings extends StatelessWidget {
         'title': AppStrings.logout,
         'onTap': () async {
           await userCubit.signOut();
+          await Hive.box('auth').clear();
           if (context.mounted) {
             Navigate.replace(context, const LoginPage());
           }

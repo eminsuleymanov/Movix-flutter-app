@@ -45,11 +45,10 @@ class RegisterPage extends StatelessWidget {
                       Navigate.replace(context, const LoginPage());
                     }
                   });
+                } else if (state is RegisterError) {
+                  GlobalSnackbar.show(context, state.error,
+                      backgroundColor: AppColors.red);
                 }
-                else if (state is RegisterError) {
-              GlobalSnackbar.show(context, state.error,
-                  backgroundColor: AppColors.red);
-            }
               },
               builder: (context, state) {
                 return ListView(
@@ -82,13 +81,18 @@ class RegisterPage extends StatelessWidget {
                     SizedBox(
                       height: 34.h,
                     ),
-                    Center(
-                      child: GlobalButton(
-                        text: AppStrings.signUp,
-                        color: AppColors.purple,
-                        onTap: context.read<RegisterCubit>().register,
+                    if (state is RegisterLoading)
+                      const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      )
+                    else
+                      Center(
+                        child: GlobalButton(
+                          text: AppStrings.signUp,
+                          color: AppColors.purple,
+                          onTap: context.read<RegisterCubit>().register,
+                        ),
                       ),
-                    ),
                   ],
                 );
               },

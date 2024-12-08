@@ -13,16 +13,16 @@ class UserCredentials extends StatelessWidget {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         if (state is UserSuccess) {
-          final user = state.user!;
+          final user = state.user;
           return Column(
             children: [
               Text(
-                user.displayName!,
+                user.displayName ?? 'No Name',
                 style: AppTxtStyles.montserrat300Grey,
               ),
               AppSizedboxes.h16,
               Text(
-                user.email!,
+                user.email ?? 'No Email',
                 style: AppTxtStyles.montRegWhite14,
               ),
             ],
@@ -30,10 +30,15 @@ class UserCredentials extends StatelessWidget {
         } else if (state is UserLoading) {
           return const CircularProgressIndicator.adaptive();
         } else if (state is UserError) {
-          return Text(state.error);
-        }
-        else{
-          return const SizedBox.shrink();
+          return Text(
+            state.error,
+            style: AppTxtStyles.montserrat300Grey,
+          );
+        } else {
+          return Text(
+            "Unexpected error occurred.",
+            style: AppTxtStyles.montserrat300Grey,
+          );
         }
       },
     );

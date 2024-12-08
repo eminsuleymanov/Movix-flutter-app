@@ -21,6 +21,7 @@ class WishlistScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundPrimary,
+        automaticallyImplyLeading: false,
         title: Text(
           AppStrings.wishlist,
           style: AppTxtStyles.monts20white500,

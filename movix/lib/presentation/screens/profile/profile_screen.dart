@@ -22,6 +22,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundPrimary,
+        automaticallyImplyLeading: false,
         title: Text(
           AppStrings.profile,
           style: AppTxtStyles.montserrat500white,

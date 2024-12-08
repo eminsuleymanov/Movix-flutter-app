@@ -34,6 +34,8 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       emit(RegisterSuccess(
           "Registration successful! Welcome, ${fullnameController.text}."));
+
+      resetControllers();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         emit(RegisterError(

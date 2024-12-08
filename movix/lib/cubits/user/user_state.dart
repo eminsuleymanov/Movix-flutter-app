@@ -7,9 +7,9 @@ final class UserInitial extends UserState {}
 final class UserLoading extends UserState {}
 
 final class UserSuccess extends UserState {
-  final User? user;
+  final User user;
   final String? message;
-  UserSuccess({this.user, this.message});
+  UserSuccess({required this.user, this.message});
 }
 
 final class UserError extends UserState {

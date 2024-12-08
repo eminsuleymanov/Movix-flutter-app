@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../cubits/user/user_cubit.dart';
 import '../../../../../../utils/constants/app_strings.dart';
 import '../../../../../widgets/global_input.dart';
 
 class ConfirmPasswordInput extends StatelessWidget {
+  const ConfirmPasswordInput({super.key});
 
-  const ConfirmPasswordInput({ super.key });
+  @override
+  Widget build(BuildContext context) {
+    final userCubit = context.read<UserCubit>();
 
-   @override
-   Widget build(BuildContext context) {
-        return const GlobalInput(isSecure: false, label: AppStrings.fullName);
+    return GlobalInput(
+      controller: userCubit.editConPasswordController,
+      isSecure: true,
+      label: AppStrings.confirmPassword,
+    );
   }
 }

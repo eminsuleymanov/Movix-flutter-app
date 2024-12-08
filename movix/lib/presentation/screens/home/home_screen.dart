@@ -33,6 +33,7 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: AppColors.backgroundPrimary,
           centerTitle: false,
           toolbarHeight: 80.h,
+          automaticallyImplyLeading: false,
           actions: [
             Padding(
               padding: AppPaddings.r16,

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 part 'login_state.dart';
 
@@ -27,6 +28,10 @@ class LoginCubit extends Cubit<LoginState> {
         email: email.text.trim(),
         password: password.text.trim(),
       );
+      
+      final authBox = Hive.box('auth');
+      authBox.put('isLoggedIn', true);
+
       emit(LoginSuccess(
           user: userCredential.user,
           message: "${email.text} has successfully logged in"));
@@ -34,10 +39,10 @@ class LoginCubit extends Cubit<LoginState> {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
         emit(LoginError('An Invalid email format'));
-        log('Firebase Authentication Exception: ${e.code}/////////////');
+        log('Firebase Authentication Exception: ${e.code}');
       } else if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         emit(LoginError('Email or password is incorrect'));
-        log('Firebase Authentication Exception: ${e.code}/////////////');
+        log('Firebase Authentication Exception: ${e.code}');
       }
     } catch (e) {
       emit(LoginError('Something went wrong. Please try again.'));

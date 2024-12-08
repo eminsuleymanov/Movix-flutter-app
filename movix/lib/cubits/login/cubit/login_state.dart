@@ -28,13 +28,13 @@ final class ResetPasswordSuccess extends LoginState {
 }
 
 
-final class LogOut extends LoginState{
-  final String message;
+// final class LogOut extends LoginState{
+//   final String message;
 
-  LogOut(this.message);
-}
-final class LogOutError extends LoginState{
-  final String message;
+//   LogOut(this.message);
+// }
+// final class LogOutError extends LoginState{
+//   final String message;
 
-  LogOutError(this.message);
-}
+//   LogOutError(this.message);
+// }

@@ -10,11 +10,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
+  await Firebase.initializeApp();
   Hive.registerAdapter(WishlistMovieAdapter());
-   await Firebase.initializeApp();
-  // await Hive.deleteBoxFromDisk(AppStrings.wishlist);
-
-  await Hive.openBox<WishlistMovie>(AppStrings.wishlist); 
+  await Hive.openBox<WishlistMovie>(AppStrings.wishlist);
+  await Hive.openBox('auth');
 
   runApp(const App());
 }
