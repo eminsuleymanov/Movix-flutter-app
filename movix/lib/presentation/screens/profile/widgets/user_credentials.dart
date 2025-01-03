@@ -13,7 +13,7 @@ class UserCredentials extends StatelessWidget {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         if (state is UserSuccess) {
-          final user = state.user;
+          final user = state.userModel;
           return Column(
             children: [
               Text(
@@ -36,7 +36,7 @@ class UserCredentials extends StatelessWidget {
           );
         } else {
           return Text(
-            "Unexpected error occurred.",
+            "Unexpected smth error occurred.",
             style: AppTxtStyles.montserrat300Grey,
           );
         }

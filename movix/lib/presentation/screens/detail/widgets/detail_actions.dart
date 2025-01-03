@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movix/utils/extensions/locale_extension.dart';
 
 import '../../../../cubits/wishlist/wishlist_cubit.dart';
 import '../../../../utils/constants/app_sizedboxes.dart';
@@ -28,7 +29,7 @@ class DetailActions extends StatelessWidget {
       children: [
         DetailActionBtn(
           icon: Icons.local_movies_rounded,
-          text: AppStrings.trailer,
+          text: context.l10n.trailer,
           onTap: () {
             if (trailerUrl.isEmpty) {
               const snackBar = SnackBar(

@@ -14,6 +14,7 @@ Future<void> main() async {
   Hive.registerAdapter(WishlistMovieAdapter());
   await Hive.openBox<WishlistMovie>(AppStrings.wishlist);
   await Hive.openBox('auth');
+  await Hive.openBox('locale');
 
   runApp(const App());
 }

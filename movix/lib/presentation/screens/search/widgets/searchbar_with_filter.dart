@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movix/cubits/movie/cubit/movie_cubit.dart';
 
+import '../../../../cubits/movie/cubit/movie_cubit.dart';
 import '../../../../utils/constants/app_colors.dart';
 import '../../../../utils/constants/app_paddings.dart';
 import '../../../../utils/constants/app_sizedboxes.dart';
-import '../../../../utils/constants/app_strings.dart';
 import '../../../../utils/constants/app_txt_styles.dart';
+import '../../../../utils/extensions/locale_extension.dart';
 
 class SearchbarWithFilter extends StatelessWidget {
   const SearchbarWithFilter({
@@ -38,7 +38,7 @@ class SearchbarWithFilter extends StatelessWidget {
                     size: 26,
                   ),
                 ),
-                hintText: AppStrings.searchMovie,
+                hintText: context.l10n.searchMovie,
                 hintStyle: AppTxtStyles.montserratRegularWhite16,
                 border: InputBorder.none,
               ),

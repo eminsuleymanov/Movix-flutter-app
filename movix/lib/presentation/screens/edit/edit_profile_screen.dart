@@ -6,13 +6,13 @@ import '../../../cubits/user/user_cubit.dart';
 import '../../../utils/constants/app_colors.dart';
 import '../../../utils/constants/app_paddings.dart';
 import '../../../utils/constants/app_sizedboxes.dart';
-import '../../../utils/constants/app_strings.dart';
+import '../../../utils/extensions/locale_extension.dart';
 import '../../widgets/custom_basic_appbar.dart';
 import '../../widgets/global_button.dart';
 import '../../widgets/global_profile_avatar.dart';
 import '../../widgets/global_snackbar.dart';
 import '../auth/register/widgets/inputs/confirm_pasword_input.dart';
-import '../profile/profile_screen.dart';
+import '../home/home_view.dart';
 import 'widgets/inputs/email/email_input.dart';
 import 'widgets/inputs/fullname/full_name_input.dart';
 import 'widgets/inputs/password/password_input.dart';
@@ -23,15 +23,15 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomBasicAppbar(text: AppStrings.editYourProfile),
+      appBar: CustomBasicAppbar(text: context.l10n.editYourProfile),
       body: Padding(
         padding: AppPaddings.all16,
         child: BlocConsumer<UserCubit, UserState>(
           listener: (context, state) {
             if (state is UserSuccess) {
-              GlobalSnackbar.show(context, state.message!,
+              GlobalSnackbar.show(context, state.message,
                   backgroundColor: AppColors.green);
-              Navigate.replace(context, const ProfileScreen());
+              Navigate.replace(context, const HomeView());
             } else if (state is UserError) {
               GlobalSnackbar.show(context, state.error,
                   backgroundColor: AppColors.red);
@@ -40,7 +40,7 @@ class EditProfileScreen extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                const GlobalProfileAvatar(),
+                const GlobalProfileAvatar(inEditScreen: true,),
                 AppSizedboxes.h45,
                 const FullNameInput(),
                 AppSizedboxes.h16,
@@ -50,16 +50,11 @@ class EditProfileScreen extends StatelessWidget {
                 AppSizedboxes.h16,
                 const ConfirmPaswordInput(),
                 AppSizedboxes.h25,
-                if (state is UserLoading)
-                  const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  )
-                else
-                  GlobalButton(
-                    text: AppStrings.updateYourProfile,
-                    color: AppColors.purple,
-                    onTap: context.read<UserCubit>().editUserProfile,
-                  )
+                GlobalButton(
+                  text: context.l10n.updateYourProfile,
+                  color: AppColors.purple,
+                  onTap: context.read<UserCubit>().editUserProfile,
+                )
               ],
             );
           },

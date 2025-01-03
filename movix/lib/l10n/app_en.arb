@@ -1,0 +1,158 @@
+{
+  "@@locale": "en",
+
+  "findYourBest": "Find Your Best \nMovie",
+  "@findYourBest": {
+    "description": "Home screen header: prompt to find your best movie."
+  },
+  "searchMovie": "Search Movie",
+  "@searchMovie": {
+    "description": "Placeholder or label for searching a movie."
+  },
+  "nowPlaying": "Now Playing",
+  "@nowPlaying": {
+    "description": "Section header showing currently playing movies."
+  },
+  "viewAll": "View all",
+  "@viewAll": {
+    "description": "Button or link to view all items in a list."
+  },
+  "mostViewed": "Most Viewed",
+  "@mostViewed": {
+    "description": "Section header for the most viewed movies."
+  },
+  "trending": "Trending",
+  "@trending": {
+    "description": "Section header for trending movies."
+  },
+  "filteredMovies": "Filtered Movies",
+  "@filteredMovies": {
+    "description": "Section title for filtered movie results."
+  },
+  "allMovies": "All Movies",
+  "@allMovies": {
+    "description": "Section header for all movies."
+  },
+
+  "cast": "Cast",
+  "@cast": {
+    "description": "Detail screen: label for cast members."
+  },
+  "trailer": "Trailer",
+  "@trailer": {
+    "description": "Detail screen: label for trailer."
+  },
+
+  "wishlist": "Wishlist",
+  "@wishlist": {
+    "description": "Wishlist screen: section or tab name."
+  },
+  
+  "home": "Home",
+  "@home": {
+    "description": "Navigation bar: home tab label."
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Navigation bar: profile tab label."
+  },
+  
+  "editProfile": "Edit Profile",
+  "@editProfile": {
+    "description": "Profile screen: button to edit profile."
+  },
+  "changeLanguage": "Change language",
+  "@changeLanguage": {
+    "description": "Profile screen: button or menu option to change language."
+  },
+  "policy": "Policy",
+  "@policy": {
+    "description": "Profile screen: label for policy section."
+  },
+  "logout": "Log out",
+  "@logout": {
+    "description": "Profile screen: button to log out."
+  },
+  "editYourProfile": "Edit Your Profile",
+  "@editYourProfile": {
+    "description": "Profile screen: title to edit the user profile."
+  },
+  "updateYourProfile": "Update Your Profile",
+  "@updateYourProfile": {
+    "description": "Profile screen: prompt or button to save updates."
+  },
+  "selectLanguage": "Select language",
+  "@selectLanguage": {
+    "description": "Profile screen: label/title for language selection."
+  },
+   
+  "alreadyHaveAcc": "Already have an Account?",
+  "@alreadyHaveAcc": {
+    "description": "Prompt to ask if the user already has an account."
+  },
+
+  "signIn": "Sign In",
+  "@signIn": {
+    "description": "Button text for signing in."
+  },
+
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Button text for signing up."
+  },
+
+  "emailAddress": "Email Address",
+  "@emailAddress": {
+    "description": "Label for the email address input field."
+  },
+
+  "fullName": "Full name",
+  "@fullName": {
+    "description": "Label for the full name input field."
+  },
+
+  "password": "Password",
+  "@password": {
+    "description": "Label for the password input field."
+  },
+
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Label for the confirm password input field."
+  },
+
+  "resetPassword": "Reset Password",
+  "@resetPassword": {
+    "description": "Label for the reset password screen or button."
+  },
+
+  "sendLink": "Send link",
+  "@sendLink": {
+    "description": "Button text for sending a reset password link."
+  },
+
+  "welcomeBack": "Welcome Back,\n Movie Lover!",
+  "@welcomeBack": {
+    "description": "Greeting text for the login screen."
+  },
+
+  "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {
+    "description": "Prompt to reset password if forgotten."
+  },
+
+  "login": "Login",
+  "@login": {
+    "description": "Button text for logging in."
+  },
+
+  "createNewAcc": "Create new Account?",
+  "@createNewAcc": {
+    "description": "Prompt to create a new account."
+  },
+
+  "createNewAccount": "Create New \n Your Account",
+  "@createNewAccount": {
+    "description": "Header for the account creation screen."
+  }
+}

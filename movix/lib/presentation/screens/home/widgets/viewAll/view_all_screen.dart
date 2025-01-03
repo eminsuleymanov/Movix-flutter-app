@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../cubits/movie/cubit/movie_cubit.dart';
 import '../../../../../utils/constants/app_paddings.dart';
 import '../../../../../utils/constants/app_sizedboxes.dart';
-import '../../../../../utils/constants/app_strings.dart';
 import '../../../../../utils/constants/app_txt_styles.dart';
+import '../../../../../utils/extensions/locale_extension.dart';
 import '../../../../widgets/custom_basic_appbar.dart';
 import '../../../../widgets/movie_list_tile.dart';
 
@@ -15,7 +15,7 @@ class ViewAllScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomBasicAppbar(text: AppStrings.allMovies),
+      appBar: CustomBasicAppbar(text: context.l10n.allMovies),
       body: Padding(
         padding: AppPaddings.all16,
         child: BlocBuilder<MovieCubit, MovieState>(

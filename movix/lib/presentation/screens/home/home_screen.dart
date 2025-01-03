@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/routes/generator.dart';
 import '../../../cubits/movie/cubit/movie_cubit.dart';
 import '../../../utils/constants/app_colors.dart';
 import '../../../utils/constants/app_paddings.dart';
 import '../../../utils/constants/app_sizedboxes.dart';
-import '../../../utils/constants/app_strings.dart';
 import '../../../utils/constants/app_txt_styles.dart';
-import '../../../utils/constants/assets_paths.dart';
+import '../../../utils/extensions/locale_extension.dart';
+import '../../widgets/global_profile_avatar.dart';
 import '../../widgets/global_section_headlines.dart';
 import '../search/search_screen.dart';
 import '../search/widgets/searchbar_with_filter.dart';
@@ -27,24 +26,17 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            AppStrings.findYourBest,
+            context.l10n.findYourBest,
             style: AppTxtStyles.montserrat500white,
           ),
           backgroundColor: AppColors.backgroundPrimary,
           centerTitle: false,
           toolbarHeight: 80.h,
           automaticallyImplyLeading: false,
-          actions: [
+          actions: const [
             Padding(
               padding: AppPaddings.r16,
-              child: CircleAvatar(
-                radius: 25.r,
-                child: SvgPicture.asset(
-                  AssetsPaths.avatar,
-                  width: 50.h,
-                  height: 50.h,
-                ),
-              ),
+              child: GlobalProfileAvatar(inEditScreen: false, radius: 25,)
             ),
           ]),
       body: Padding(
@@ -62,14 +54,14 @@ class HomeScreen extends StatelessWidget {
           const CategoryList(),
           AppSizedboxes.h25,
           GlobalSectionHeadlines(
-            heading: AppStrings.nowPlaying,
+            heading: context.l10n.nowPlaying,
             onPressed: () => Navigate.to(context, const ViewAllScreen()),
           ),
           AppSizedboxes.h20,
           const BannerSlider(isTrending: true),
           AppSizedboxes.h25,
           GlobalSectionHeadlines(
-            heading: AppStrings.trending,
+            heading: context.l10n.trending,
             onPressed: () => Navigate.to(context, const ViewAllScreen()),
           ),
           AppSizedboxes.h20,
@@ -78,7 +70,7 @@ class HomeScreen extends StatelessWidget {
           ),
           AppSizedboxes.h25,
           GlobalSectionHeadlines(
-            heading: AppStrings.mostViewed,
+            heading: context.l10n.mostViewed,
             onPressed: () => Navigate.to(context, const ViewAllScreen()),
           ),
           AppSizedboxes.h20,

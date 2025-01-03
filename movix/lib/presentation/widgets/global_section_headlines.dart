@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/constants/app_strings.dart';
 import '../../utils/constants/app_txt_styles.dart';
+import '../../utils/extensions/locale_extension.dart';
 
 class GlobalSectionHeadlines extends StatelessWidget {
   const GlobalSectionHeadlines({
@@ -17,15 +17,25 @@ class GlobalSectionHeadlines extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          heading,
-          style: AppTxtStyles.monts20white500,
-        ),
-        TextButton(
-          onPressed: onPressed,
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.7,
           child: Text(
-            AppStrings.viewAll,
-            style: AppTxtStyles.montserratRegularBlue,
+            heading,
+            style: AppTxtStyles.monts20white500,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.2,
+          child: TextButton(
+            onPressed: onPressed,
+            child: Text(
+              context.l10n.viewAll,
+              style: AppTxtStyles.montserratRegularBlue,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
           ),
         )
       ],

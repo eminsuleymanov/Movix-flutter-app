@@ -1,46 +1,105 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:movix/cubits/user/user_cubit.dart';
+import 'package:movix/presentation/widgets/global_snackbar.dart';
 import 'package:movix/utils/constants/app_colors.dart';
 import 'package:movix/utils/constants/assets_paths.dart';
 
 class GlobalProfileAvatar extends StatelessWidget {
-  const GlobalProfileAvatar({super.key, this.onTap});
+  const GlobalProfileAvatar({
+    super.key,
+    required this.inEditScreen, this.radius, this.roundSize,
+  });
+  final bool inEditScreen;
+  final double? radius;
+  final double? roundSize;
 
-  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.center,
-        children: <Widget>[
-          CircleAvatar(
-            radius: 50.r,
-            child: SvgPicture.asset(
-              AssetsPaths.avatar,
-              width: 100.w,
-              height: 100.h,
+    final userCubit = context.read<UserCubit>();
+    return BlocConsumer<UserCubit, UserState>(
+      listener: (context, state) {
+        if (state is UserImageUploaded) {
+          GlobalSnackbar.show(context, state.message,
+              backgroundColor: AppColors.green);
+        } else if (state is UserImageUploadedError) {
+          GlobalSnackbar.show(context, state.error,
+              backgroundColor: AppColors.red);
+        } else if (state is UserImageLoading) {
+          const CircularProgressIndicator.adaptive();
+        }
+      },
+      builder: (context, state) {
+        final localFile = context.read<UserCubit>().profilePhoto.valueOrNull;
+
+        // 2. Possibly get the remote photoUrl from userModel
+        String? remotePhotoUrl;
+
+        if (state is UserSuccess) {
+          // If your UserSuccess has a userModel
+          remotePhotoUrl = state.userModel.photoUrl;
+        }
+        return Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
+          children: [
+            CircleAvatar(
+              radius: radius ?? 50.r,
+              child: localFile != null
+                  ? ClipOval(
+                      child: Image.file(
+                        localFile,
+                        width: roundSize ?? 100.w,
+                        height: roundSize ?? 100.h,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : (remotePhotoUrl != null && remotePhotoUrl.isNotEmpty)
+                      ? ClipOval(
+                          child: Image.network(
+                            remotePhotoUrl,
+                            width: roundSize ?? 100.w,
+                            height: roundSize ?? 100.h,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : SvgPicture.asset(
+                          AssetsPaths.avatar,
+                          width: roundSize ?? 100.w,
+                          height: roundSize ?? 100.h,
+                        ),
             ),
-          ),
-          
-          Positioned(
-            bottom: -10,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: AppColors.white,
-                shape: BoxShape.circle,
+            if (inEditScreen)
+              Positioned(
+                bottom: -10,
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: const BoxDecoration(
+                    color: AppColors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    onPressed: () async {
+                      await userCubit.pickProfilePhoto();
+                      if (userCubit.profilePhoto.hasValue) {
+                        await userCubit.uploadProfilePhoto();
+                      }
+                    },
+                    padding: EdgeInsets.zero,
+                    icon: const Icon(
+                      Icons.add_circle_outlined,
+                      size: 30,
+                      color: AppColors.lightBlueGradient1,
+                    ),
+                  ),
+                ),
               ),
-              child: const Icon(
-                Icons.add_circle_outlined,
-                color: AppColors.lightBlueGradient1,
-                size: 28,
-              ),
-            ),
-          ),
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
 }

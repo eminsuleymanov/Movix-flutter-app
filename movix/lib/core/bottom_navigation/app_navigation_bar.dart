@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movix/utils/constants/app_colors.dart';
-import 'package:movix/utils/constants/app_strings.dart';
+
+import '../../utils/constants/app_colors.dart';
+import '../../utils/extensions/locale_extension.dart';
 
 class AppNavigationBar extends StatelessWidget {
   final int currentIndex;
@@ -20,18 +21,18 @@ class AppNavigationBar extends StatelessWidget {
       backgroundColor: AppColors.backgroundPrimary,
       selectedItemColor: AppColors.white,
       unselectedItemColor: AppColors.lightBlueGradient1,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: AppStrings.home,
+          icon: const Icon(Icons.home),
+          label: context.l10n.home,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
-          label: AppStrings.wishlist,
+          icon: const Icon(Icons.favorite),
+          label: context.l10n.wishlist,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: AppStrings.profile,
+          icon: const Icon(Icons.person),
+          label: context.l10n.profile,
         ),
       ],
     );

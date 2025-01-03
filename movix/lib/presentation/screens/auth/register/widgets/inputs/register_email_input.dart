@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../cubits/register/register_cubit.dart';
-import '../../../../../../utils/constants/app_strings.dart';
+import '../../../../../../utils/extensions/locale_extension.dart';
 import '../../../../../widgets/global_input.dart';
 
 class RegisterEmailInput extends StatelessWidget {
@@ -12,7 +12,7 @@ class RegisterEmailInput extends StatelessWidget {
   Widget build(BuildContext context) {
     final registerCubit = context.read<RegisterCubit>();
     return GlobalInput(
-      label: AppStrings.emailAddress,
+      label: context.l10n.emailAddress,
       controller: registerCubit.emailController,
       isSecure: false,
       prefixIcon: null,

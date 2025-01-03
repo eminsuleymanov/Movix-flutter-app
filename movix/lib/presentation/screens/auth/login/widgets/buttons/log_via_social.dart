@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movix/utils/constants/app_colors.dart';
 import 'package:movix/utils/constants/assets_paths.dart';
+
+import '../../../../../../cubits/login/cubit/login_cubit.dart';
 
 class LogViaSocial extends StatelessWidget {
   const LogViaSocial({super.key});
@@ -15,7 +18,9 @@ class LogViaSocial extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         GestureDetector(
-          onTap: (){},
+          onTap: (){
+            context.read<LoginCubit>().signInWithGoogle();
+          },
           child: DecoratedBox(
             decoration: const BoxDecoration(
               color: AppColors.background2,

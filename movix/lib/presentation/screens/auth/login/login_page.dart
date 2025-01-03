@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:movix/utils/extensions/locale_extension.dart';
 
 import '../../../../core/routes/generator.dart';
 import '../../../../cubits/login/cubit/login_cubit.dart';
+import '../../../../cubits/user/user_cubit.dart';
 import '../../../../utils/constants/app_colors.dart';
 import '../../../../utils/constants/app_paddings.dart';
 import '../../../../utils/constants/app_strings.dart';
@@ -30,14 +32,14 @@ class LoginPage extends StatelessWidget {
         padding: AppPaddings.all16,
         child: BlocConsumer<LoginCubit, LoginState>(
           listener: (context, state) {
-            if(state is LoginLoading){
-               const CircularProgressIndicator.adaptive();
-            }
-            else if (state is LoginSuccess) {
+            if (state is LoginLoading) {
+              const CircularProgressIndicator.adaptive();
+            } else if (state is LoginSuccess) {
               GlobalSnackbar.show(context, state.message!,
                   backgroundColor: AppColors.green);
               Future.delayed(const Duration(milliseconds: 1200), () {
                 if (context.mounted) {
+                  context.read<UserCubit>().fetchUserData();
                   Navigate.replace(context, const HomeView());
                 }
               });
@@ -58,7 +60,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  AppStrings.welcomeBack,
+                  context.l10n.welcomeBack,
                   style: AppTxtStyles.montserrat500white,
                 ),
                 20.verticalSpace,
@@ -72,13 +74,13 @@ class LoginPage extends StatelessWidget {
                 else
                   Center(
                     child: GlobalButton(
-                      text: AppStrings.login,
+                      text: context.l10n.login,
                       color: AppColors.purple,
                       onTap: context.read<LoginCubit>().signIn,
                     ),
                   ),
                 AuthMiniLinks(
-                  grayTxt: AppStrings.createNewAcc,
+                  grayTxt: context.l10n.createNewAcc,
                   blueTxt: AppStrings.signUp,
                   onPressed: () => Navigate.to(context, const RegisterPage()),
                 ),

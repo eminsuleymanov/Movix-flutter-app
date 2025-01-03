@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
+import 'package:movix/cubits/locale/locale_cubit.dart';
 
 import 'cubits/category/cubit/category_cubit.dart';
 import 'cubits/login/cubit/login_cubit.dart';
@@ -16,25 +19,35 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localeBox = Hive.box('locale');
+    final savedCode = localeBox.get('userLocale', defaultValue: 'en') as String;
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) => MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => MovieCubit()..getMovies()..getTrendingMovies()),
-          BlocProvider(create: (context) => CategoryCubit()..getCategories()),
-          BlocProvider(create: (context)=> WishlistCubit()),
-          BlocProvider(create: (context)=> LoginCubit()),
-          BlocProvider(create: (context)=> RegisterCubit()),
-          BlocProvider(create: (context)=> UserCubit()..fetchUserData()),
-        ],
-        child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: AppThemes.appTheme,
-            home: const SplashScreen(),
-            )
-            
-
-      ),
+          providers: [
+            BlocProvider(
+                create: (context) => MovieCubit()
+                  ..getMovies()
+                  ..getTrendingMovies()),
+            BlocProvider(create: (context) => CategoryCubit()..getCategories()),
+            BlocProvider(create: (context) => WishlistCubit()),
+            BlocProvider(create: (context) => LoginCubit()),
+            BlocProvider(create: (context) => RegisterCubit()),
+            BlocProvider(create: (context) => UserCubit()..fetchUserData()),
+             BlocProvider(create: (context) => LocaleCubit()..changeLocale(Locale(savedCode))),
+          ],
+          child: BlocBuilder<LocaleCubit, LocaleState>(
+            builder: (context, state) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: AppThemes.appTheme,
+                locale: state.locale,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                home: const SplashScreen(),
+              );
+            },
+          )),
     );
   }
 }

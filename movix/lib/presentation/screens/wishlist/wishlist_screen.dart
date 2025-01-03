@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:movix/utils/constants/app_paddings.dart';
 
 import '../../../cubits/wishlist/wishlist_cubit.dart';
 import '../../../data/models/wishlist_movie.dart';
 import '../../../utils/constants/app_colors.dart';
+import '../../../utils/constants/app_paddings.dart';
 import '../../../utils/constants/app_sizedboxes.dart';
-import '../../../utils/constants/app_strings.dart';
 import '../../../utils/constants/app_txt_styles.dart';
+import '../../../utils/extensions/locale_extension.dart';
 import '../../widgets/movie_list_tile.dart';
 
 class WishlistScreen extends StatelessWidget {
@@ -23,7 +23,7 @@ class WishlistScreen extends StatelessWidget {
         backgroundColor: AppColors.backgroundPrimary,
         automaticallyImplyLeading: false,
         title: Text(
-          AppStrings.wishlist,
+          context.l10n.wishlist,
           style: AppTxtStyles.monts20white500,
         ),
       ),

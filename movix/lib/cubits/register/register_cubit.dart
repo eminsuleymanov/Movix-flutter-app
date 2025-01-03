@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,17 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       await userCredential.user
           ?.updateDisplayName(fullnameController.text.trim());
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'uid': userCredential.user!.uid,
+        'displayName': fullnameController.text.trim(),
+        'email': emailController.text.trim(),
+        'photoUrl': '',
+        'createdAt': FieldValue.serverTimestamp(),
+      });
 
       emit(RegisterSuccess(
           "Registration successful! Welcome, ${fullnameController.text}."));

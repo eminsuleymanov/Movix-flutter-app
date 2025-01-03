@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../data/models/movie.dart';
 import '../../../../utils/constants/app_sizedboxes.dart';
-import '../../../../utils/constants/app_strings.dart';
 import '../../../../utils/constants/app_txt_styles.dart';
+import '../../../../utils/extensions/locale_extension.dart';
 import 'actor_box.dart';
 
 class ActorList extends StatelessWidget {
@@ -18,7 +18,7 @@ class ActorList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppStrings.cast,
+          context.l10n.cast,
           style: AppTxtStyles.montserrat500white,
         ),
         AppSizedboxes.h16,

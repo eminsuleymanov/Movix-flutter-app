@@ -1,0 +1,158 @@
+{
+  "@@locale": "ru",
+
+  "findYourBest": "Найди свой лучший \nфильм",
+  "@findYourBest": {
+    "description": "Заголовок на главном экране, призыв найти лучший фильм."
+  },
+  "searchMovie": "Поиск фильма",
+  "@searchMovie": {
+    "description": "Поле или метка для поиска фильма."
+  },
+  "nowPlaying": "Сейчас в кино",
+  "@nowPlaying": {
+    "description": "Раздел для фильмов, которые сейчас идут."
+  },
+  "viewAll": "Смотреть все",
+  "@viewAll": {
+    "description": "Кнопка или ссылка, чтобы показать все."
+  },
+  "mostViewed": "Самые просматриваемые",
+  "@mostViewed": {
+    "description": "Раздел с наиболее просматриваемыми фильмами."
+  },
+  "trending": "Популярное",
+  "@trending": {
+    "description": "Раздел с трендовыми фильмами."
+  },
+  "filteredMovies": "Отфильтрованные фильмы",
+  "@filteredMovies": {
+    "description": "Раздел с результатами фильтрации."
+  },
+  "allMovies": "Все фильмы",
+  "@allMovies": {
+    "description": "Раздел со всеми фильмами."
+  },
+
+  "cast": "Актеры",
+  "@cast": {
+    "description": "Экран деталей: список актеров."
+  },
+  "trailer": "Трейлер",
+  "@trailer": {
+    "description": "Экран деталей: трейлер фильма."
+  },
+
+  "wishlist": "Список желаемого",
+  "@wishlist": {
+    "description": "Экран или вкладка избранного/списка желаемого."
+  },
+  
+  "home": "Главная",
+  "@home": {
+    "description": "Навигационная панель: главная вкладка."
+  },
+  "profile": "Профиль",
+  "@profile": {
+    "description": "Навигационная панель: вкладка профиля."
+  },
+
+  "editProfile": "Редактировать профиль",
+  "@editProfile": {
+    "description": "Экран профиля: кнопка для редактирования."
+  },
+  "changeLanguage": "Изменить язык",
+  "@changeLanguage": {
+    "description": "Экран профиля: пункт меню для смены языка."
+  },
+  "policy": "Политика",
+  "@policy": {
+    "description": "Экран профиля: раздел политики."
+  },
+  "logout": "Выйти",
+  "@logout": {
+    "description": "Экран профиля: кнопка выхода из аккаунта."
+  },
+  "editYourProfile": "Редактируйте свой профиль",
+  "@editYourProfile": {
+    "description": "Экран профиля: заголовок для редактирования профиля."
+  },
+  "updateYourProfile": "Обновите свой профиль",
+  "@updateYourProfile": {
+    "description": "Экран профиля: кнопка или текст для сохранения изменений."
+  },
+  "selectLanguage": "Выберите язык",
+  "@selectLanguage": {
+    "description": "Экран профиля: заголовок для выбора языка."
+  },
+  "alreadyHaveAcc": "Уже есть аккаунт?",
+  "@alreadyHaveAcc": {
+    "description": "Вопрос, есть ли у пользователя уже аккаунт."
+  },
+
+  "signIn": "Войти",
+  "@signIn": {
+    "description": "Текст кнопки для входа в аккаунт."
+  },
+
+  "signUp": "Зарегистрироваться",
+  "@signUp": {
+    "description": "Текст кнопки для регистрации."
+  },
+
+  "emailAddress": "Электронная почта",
+  "@emailAddress": {
+    "description": "Метка для поля ввода электронной почты."
+  },
+
+  "fullName": "Полное имя",
+  "@fullName": {
+    "description": "Метка для поля ввода полного имени."
+  },
+
+  "password": "Пароль",
+  "@password": {
+    "description": "Метка для поля ввода пароля."
+  },
+
+  "confirmPassword": "Подтвердите пароль",
+  "@confirmPassword": {
+    "description": "Метка для поля подтверждения пароля."
+  },
+
+  "resetPassword": "Сбросить пароль",
+  "@resetPassword": {
+    "description": "Метка для экрана или кнопки сброса пароля."
+  },
+
+  "sendLink": "Отправить ссылку",
+  "@sendLink": {
+    "description": "Текст кнопки для отправки ссылки на сброс пароля."
+  },
+
+  "welcomeBack": "Добро пожаловать назад,\n Любитель фильмов!",
+  "@welcomeBack": {
+    "description": "Приветствие на экране входа."
+  },
+
+  "forgotPassword": "Забыли пароль?",
+  "@forgotPassword": {
+    "description": "Подсказка для восстановления пароля."
+  },
+
+  "login": "Войти",
+  "@login": {
+    "description": "Текст кнопки для входа."
+  },
+
+  "createNewAcc": "Создать новый аккаунт?",
+  "@createNewAcc": {
+    "description": "Вопрос о создании нового аккаунта."
+  },
+
+  "createNewAccount": "Создайте новый \nсвой аккаунт",
+  "@createNewAccount": {
+    "description": "Заголовок для экрана создания аккаунта."
+  }
+
+}

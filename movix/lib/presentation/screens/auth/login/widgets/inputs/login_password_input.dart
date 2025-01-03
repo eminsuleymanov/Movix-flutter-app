@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movix/cubits/login/cubit/login_cubit.dart';
+
+import '../../../../../../cubits/login/cubit/login_cubit.dart';
+import '../../../../../../utils/extensions/locale_extension.dart';
 import '../../../../../widgets/global_input.dart';
-import '../../../../../../utils/constants/app_strings.dart';
 
 class LoginPasswordInput extends StatelessWidget {
   const LoginPasswordInput({super.key});
@@ -12,7 +13,7 @@ class LoginPasswordInput extends StatelessWidget {
     final cubit = context.read<LoginCubit>();
     return GlobalInput(
       isSecure: true,
-      label: AppStrings.password,
+      label: context.l10n.password,
       controller: cubit.password,
     );
   }
