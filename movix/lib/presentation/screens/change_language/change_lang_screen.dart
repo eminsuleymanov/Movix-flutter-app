@@ -41,6 +41,15 @@ class ChangeLangScreen extends StatelessWidget {
                 Navigate.back(context, const HomeView());
               },
             ),
+            AppSizedboxes.h45,
+            LangOption(
+              language: AppStrings.azerbaijani,
+              imagePath: AssetsPaths.azerbaijaniFlag,
+              onTap: () {
+                localeCubit.changeLocale(const Locale('az'));
+                Navigate.back(context, const HomeView());
+              },
+            ),
           ],
         ),
       ),

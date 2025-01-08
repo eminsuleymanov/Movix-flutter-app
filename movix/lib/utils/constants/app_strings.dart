@@ -56,7 +56,8 @@ class AppStrings {
 
   /// Locales
   static const String english = "English";
-  static const String russian = "Russian";
+  static const String russian = "Русский";
+  static const String azerbaijani = "Azərbaycanca";
 
   /// Policy
   static const String policyText = """Effective Date: March 12, 2024

@@ -1,0 +1,140 @@
+{
+  "@@locale": "az",
+  
+  "findYourBest": "Ən yaxşı \nFilminizi tapın",
+  "@findYourBest": {
+    "description": "Home screen header: prompt to find your best movie."
+  },
+  "searchMovie": "Film axtar",
+  "@searchMovie": {
+    "description": "Placeholder or label for searching a movie."
+  },
+  "nowPlaying": "Hazırda göstərilən",
+  "@nowPlaying": {
+    "description": "Section header showing currently playing movies."
+  },
+  "viewAll": "Hamısını göstər",
+  "@viewAll": {
+    "description": "Button or link to view all items in a list."
+  },
+  "mostViewed": "Ən çox baxılanlar",
+  "@mostViewed": {
+    "description": "Section header for the most viewed movies."
+  },
+  "trending": "Populyar",
+  "@trending": {
+    "description": "Section header for trending movies."
+  },
+  "filteredMovies": "Filtrlənmiş Filmlər",
+  "@filteredMovies": {
+    "description": "Section title for filtered movie results."
+  },
+  "allMovies": "Bütün Filmlər",
+  "@allMovies": {
+    "description": "Section header for all movies."
+  },
+  "cast": "Aktyor heyəti",
+  "@cast": {
+    "description": "Detail screen: label for cast members."
+  },
+  "trailer": "Treylər",
+  "@trailer": {
+    "description": "Detail screen: label for trailer."
+  },
+  "wishlist": "Arzu siyahısı",
+  "@wishlist": {
+    "description": "Wishlist screen: section or tab name."
+  },
+  "home": "Əsas səhifə",
+  "@home": {
+    "description": "Navigation bar: home tab label."
+  },
+  "profile": "Profil",
+  "@profile": {
+    "description": "Navigation bar: profile tab label."
+  },
+  "editProfile": "Profili redaktə et",
+  "@editProfile": {
+    "description": "Profile screen: button to edit profile."
+  },
+  "changeLanguage": "Dili dəyiş",
+  "@changeLanguage": {
+    "description": "Profile screen: button or menu option to change language."
+  },
+  "policy": "Qaydalar",
+  "@policy": {
+    "description": "Profile screen: label for policy section."
+  },
+  "logout": "Hesabdan çıx",
+  "@logout": {
+    "description": "Profile screen: button to log out."
+  },
+  "editYourProfile": "Profilinizi redaktə edin",
+  "@editYourProfile": {
+    "description": "Profile screen: title to edit the user profile."
+  },
+  "updateYourProfile": "Profilinizi yeniləyin",
+  "@updateYourProfile": {
+    "description": "Profile screen: prompt or button to save updates."
+  },
+  "selectLanguage": "Dili seçin",
+  "@selectLanguage": {
+    "description": "Profile screen: label/title for language selection."
+  },
+  "signIn": "Daxil ol",
+  "@signIn": {
+    "description": "Button text for signing in."
+  },
+  "signUp": "Qeydiyyat",
+  "@signUp": {
+    "description": "Button text for creating a new account."
+  },
+  "emailAddress": "E-poçt ünvanı",
+  "@emailAddress": {
+    "description": "Label for the email address field."
+  },
+  "fullName": "Tam adı",
+  "@fullName": {
+    "description": "Label for the full name field."
+  },
+  "password": "Şifrə",
+  "@password": {
+    "description": "Label for the password field."
+  },
+  "confirmPassword": "Şifrəni təsdiqləyin",
+  "@confirmPassword": {
+    "description": "Label for confirming the password."
+  },
+  "resetPassword": "Şifrəni yenilə",
+  "@resetPassword": {
+    "description": "Label/button to reset the password."
+  },
+  "sendLink": "Keçidi göndər",
+  "@sendLink": {
+    "description": "Button text for sending a reset link."
+  },
+  "alreadyHaveAcc": "Artıq hesabınız var?",
+  "@alreadyHaveAcc": {
+    "description": "Prompt to check if user already has an account."
+  },
+  "welcomeBack": "Xoş gəldiniz,\nFilmlər həvəskarı!",
+  "@welcomeBack": {
+    "description": "Greeting text on the login screen."
+  },
+  "forgotPassword": "Şifrəni unutmusunuz?",
+  "@forgotPassword": {
+    "description": "Prompt to reset if password is forgotten."
+  },
+  "login": "Daxil ol",
+  "@login": {
+    "description": "Button text for logging in."
+  },
+  "createNewAcc": "Yeni hesab yaradın?",
+  "@createNewAcc": {
+    "description": "Prompt to create a new account."
+  },
+  "createNewAccount": "Yeni hesab \nyaradın",
+  "@createNewAccount": {
+    "description": "Title for new account creation screen."
+  }
+}

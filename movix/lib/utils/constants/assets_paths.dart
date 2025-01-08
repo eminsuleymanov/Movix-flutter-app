@@ -8,4 +8,5 @@ class AssetsPaths {
 
   static const String englishFlag = 'assets/images/united-kingdom.png';
   static const String russianFlag = 'assets/images/russia.png';
+  static const String azerbaijaniFlag = 'assets/images/azerbaijani-flag.png';
 }
