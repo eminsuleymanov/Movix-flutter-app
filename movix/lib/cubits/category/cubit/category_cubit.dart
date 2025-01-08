@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movix/data/models/category.dart';
-import 'package:movix/data/services/category_service.dart';
+
+import '../../../data/models/category.dart';
+import '../../../data/services/category_service.dart';
 
 part 'category_state.dart';
 
@@ -13,9 +14,7 @@ class CategoryCubit extends Cubit<CategoryState> {
     try {
       emit(CategoryLoading());
       final categories = await _categoryService.getCategories();
-      // log("${categories}");
       if (categories.isNotEmpty) {
-        // log("$categories");
         categories.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
        
         emit(CategorySuccess(categories));

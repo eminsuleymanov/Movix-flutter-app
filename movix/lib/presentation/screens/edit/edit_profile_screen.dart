@@ -31,7 +31,7 @@ class EditProfileScreen extends StatelessWidget {
             if (state is UserSuccess) {
               GlobalSnackbar.show(context, state.message,
                   backgroundColor: AppColors.green);
-              Navigate.replace(context, const HomeView());
+              Navigate.exit(context, const HomeView());
             } else if (state is UserError) {
               GlobalSnackbar.show(context, state.error,
                   backgroundColor: AppColors.red);

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movix/core/routes/generator.dart';
-import 'package:movix/presentation/screens/home/home_view.dart';
-import 'package:movix/utils/extensions/locale_extension.dart';
-import 'widgets/lang_option.dart';
-import '../../../utils/constants/app_sizedboxes.dart';
-import '../../../utils/constants/assets_paths.dart';
 
+import '../../../core/routes/generator.dart';
 import '../../../cubits/locale/locale_cubit.dart';
+import '../../../utils/constants/app_sizedboxes.dart';
 import '../../../utils/constants/app_strings.dart';
+import '../../../utils/constants/assets_paths.dart';
+import '../../../utils/extensions/locale_extension.dart';
 import '../../widgets/custom_basic_appbar.dart';
+import '../home/home_view.dart';
+import 'widgets/lang_option.dart';
 
 class ChangeLangScreen extends StatelessWidget {
   const ChangeLangScreen({super.key});

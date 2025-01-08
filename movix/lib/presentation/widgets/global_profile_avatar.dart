@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movix/cubits/user/user_cubit.dart';
-import 'package:movix/presentation/widgets/global_snackbar.dart';
-import 'package:movix/utils/constants/app_colors.dart';
-import 'package:movix/utils/constants/assets_paths.dart';
+
+import '../../cubits/user/user_cubit.dart';
+import '../../utils/constants/app_colors.dart';
+import '../../utils/constants/assets_paths.dart';
+import 'global_snackbar.dart';
 
 class GlobalProfileAvatar extends StatelessWidget {
   const GlobalProfileAvatar({
     super.key,
-    required this.inEditScreen, this.radius, this.roundSize,
+    required this.inEditScreen,
+    this.radius,
+    this.roundSize,
   });
   final bool inEditScreen;
   final double? radius;
@@ -34,11 +37,9 @@ class GlobalProfileAvatar extends StatelessWidget {
       builder: (context, state) {
         final localFile = context.read<UserCubit>().profilePhoto.valueOrNull;
 
-        // 2. Possibly get the remote photoUrl from userModel
         String? remotePhotoUrl;
 
         if (state is UserSuccess) {
-          // If your UserSuccess has a userModel
           remotePhotoUrl = state.userModel.photoUrl;
         }
         return Stack(
@@ -86,6 +87,9 @@ class GlobalProfileAvatar extends StatelessWidget {
                       await userCubit.pickProfilePhoto();
                       if (userCubit.profilePhoto.hasValue) {
                         await userCubit.uploadProfilePhoto();
+                      } else {
+                        Future.delayed(const Duration(milliseconds: 800),
+                            () => userCubit.fetchUserData());
                       }
                     },
                     padding: EdgeInsets.zero,

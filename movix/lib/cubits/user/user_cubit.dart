@@ -137,6 +137,7 @@ class UserCubit extends Cubit<UserState> {
       ),
       message: "Profile updated successfully.",
     ));
+    resetControllers();
   } catch (e) {
     emit(UserError(error: "Failed to update profile: $e"));
   }
@@ -150,10 +151,10 @@ class UserCubit extends Cubit<UserState> {
           await _picker.pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
         profilePhoto.add(File(pickedFile.path));
-        log('picked oldu');
         emit(UserImagePickedSuccess());
       } else {
         emit(UserImageUploadedError(error: 'No image selected.'));
+        
       }
     } catch (e) {
       emit(UserImageUploadedError(error: 'Failed to pick an image: $e'));
@@ -172,11 +173,9 @@ class UserCubit extends Cubit<UserState> {
       if (user == null) {
         log("User not authenticated.");
       }
-      log("gedir storage a");
       final ref =
           FirebaseStorage.instance.ref('profile_photos/${user!.uid}.jpg');
       await ref.putFile(imageFile!);
-      log("getdi storage");
 
       final downloadUrl = await ref.getDownloadURL();
       log('url goturdu $downloadUrl');
@@ -186,7 +185,6 @@ class UserCubit extends Cubit<UserState> {
           .update({'photoUrl': downloadUrl});
 
       log('all done');
-      // emit(UserSuccess(message: 'Profile photo updated successfully.'));
       return downloadUrl;
     } catch (e) {
       emit(UserImageUploadedError(error: 'Failed to upload image.$e'));

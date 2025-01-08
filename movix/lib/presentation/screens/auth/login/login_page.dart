@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movix/utils/extensions/locale_extension.dart';
 
 import '../../../../core/routes/generator.dart';
 import '../../../../cubits/login/cubit/login_cubit.dart';
@@ -12,6 +11,7 @@ import '../../../../utils/constants/app_paddings.dart';
 import '../../../../utils/constants/app_strings.dart';
 import '../../../../utils/constants/app_txt_styles.dart';
 import '../../../../utils/constants/assets_paths.dart';
+import '../../../../utils/extensions/locale_extension.dart';
 import '../../../widgets/global_button.dart';
 import '../../../widgets/global_snackbar.dart';
 import '../../home/home_view.dart';
@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
               Future.delayed(const Duration(milliseconds: 1200), () {
                 if (context.mounted) {
                   context.read<UserCubit>().fetchUserData();
-                  Navigate.replace(context, const HomeView());
+                  Navigate.exit(context, const HomeView());
                 }
               });
             } else if (state is LoginError) {

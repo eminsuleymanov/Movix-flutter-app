@@ -17,6 +17,12 @@ class Navigate {
           builder: (context) => page,
         ),
       );
-  static back(BuildContext context, Widget page) =>
-      Navigator.of(context).pop();
+  static void exit(BuildContext context, Widget page) =>
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => page),
+        (Route<dynamic> route) => false,
+      );
+
+  static back(BuildContext context, Widget page) => Navigator.of(context).pop();
 }

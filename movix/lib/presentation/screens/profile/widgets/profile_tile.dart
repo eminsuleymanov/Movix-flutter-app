@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movix/utils/constants/app_txt_styles.dart';
+
+import '../../../../utils/constants/app_txt_styles.dart';
 
 class ProfileTile extends StatelessWidget {
   const ProfileTile({

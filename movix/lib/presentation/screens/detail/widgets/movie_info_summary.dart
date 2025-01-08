@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movix/data/models/movie.dart';
 
+import '../../../../data/models/movie.dart';
 import '../../../../utils/constants/app_sizedboxes.dart';
 import '../../../../utils/constants/app_txt_styles.dart';
 import 'movie_additional_info.dart';

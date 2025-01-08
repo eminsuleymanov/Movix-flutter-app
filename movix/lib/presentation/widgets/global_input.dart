@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movix/utils/constants/app_txt_styles.dart';
 
 import '../../utils/constants/app_colors.dart';
+import '../../utils/constants/app_txt_styles.dart';
 
 class GlobalInput extends StatefulWidget {
   const GlobalInput({

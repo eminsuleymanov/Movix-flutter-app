@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
-import 'package:movix/cubits/locale/locale_cubit.dart';
 
 import 'cubits/category/cubit/category_cubit.dart';
+import 'cubits/locale/locale_cubit.dart';
 import 'cubits/login/cubit/login_cubit.dart';
 import 'cubits/movie/cubit/movie_cubit.dart';
 import 'cubits/register/register_cubit.dart';
@@ -34,7 +34,9 @@ class App extends StatelessWidget {
             BlocProvider(create: (context) => LoginCubit()),
             BlocProvider(create: (context) => RegisterCubit()),
             BlocProvider(create: (context) => UserCubit()..fetchUserData()),
-             BlocProvider(create: (context) => LocaleCubit()..changeLocale(Locale(savedCode))),
+            BlocProvider(
+                create: (context) =>
+                    LocaleCubit()..changeLocale(Locale(savedCode))),
           ],
           child: BlocBuilder<LocaleCubit, LocaleState>(
             builder: (context, state) {

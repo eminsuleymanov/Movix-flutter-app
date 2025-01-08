@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movix/utils/constants/app_paddings.dart';
-import 'package:movix/utils/constants/app_strings.dart';
-import 'package:movix/utils/constants/app_txt_styles.dart';
 
+import '../../../utils/constants/app_paddings.dart';
+import '../../../utils/constants/app_strings.dart';
+import '../../../utils/constants/app_txt_styles.dart';
 import '../../widgets/custom_basic_appbar.dart';
 
 class PolicyScreen extends StatelessWidget {

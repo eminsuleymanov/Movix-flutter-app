@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movix/utils/constants/app_sizedboxes.dart';
 
 import '../../../core/routes/generator.dart';
 import '../../../utils/constants/app_colors.dart';
 import '../../../utils/constants/app_paddings.dart';
+import '../../../utils/constants/app_sizedboxes.dart';
 import '../../../utils/constants/app_strings.dart';
 import '../../../utils/constants/app_txt_styles.dart';
 import '../../../utils/constants/assets_paths.dart';

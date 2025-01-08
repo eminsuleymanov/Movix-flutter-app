@@ -41,7 +41,7 @@ class ProfileSettings extends StatelessWidget {
           await userCubit.signOut();
           await Hive.box('auth').clear();
           if (context.mounted) {
-            Navigate.replace(context, const LoginPage());
+            Navigate.exit(context, const LoginPage());
           }
         },
       },

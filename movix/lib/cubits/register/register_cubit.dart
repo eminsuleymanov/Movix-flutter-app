@@ -19,6 +19,23 @@ class RegisterCubit extends Cubit<RegisterState> {
   Future<void> register() async {
     emit(RegisterLoading());
 
+    final fields = <String, TextEditingController>{
+      'Full Name': fullnameController,
+      'Email': emailController,
+      'Password': passwordController,
+      'Confirm Password': confirmPasswordController,
+    };
+
+    for (final entry in fields.entries) {
+      final label = entry.key;
+      final controller = entry.value;
+
+      if (controller.text.trim().isEmpty) {
+        emit(RegisterError("fill in this field $label."));
+        return;
+      }
+    }
+
     if (passwordController.text != confirmPasswordController.text) {
       emit(RegisterError("Passwords do not match."));
       return;
@@ -52,11 +69,11 @@ class RegisterCubit extends Cubit<RegisterState> {
       if (e.code == 'email-already-in-use') {
         emit(RegisterError(
             "This email is already in use. Please try another one."));
+      } else if (e.code == 'invalid-email') {
+        emit(RegisterError("The email address is not valid."));
       } else if (e.code == 'weak-password') {
         emit(RegisterError(
             "The password provided is too weak. Please use a stronger password."));
-      } else if (e.code == 'invalid-email') {
-        emit(RegisterError("The email address is not valid."));
       } else {
         emit(RegisterError(e.message ?? "An unknown error occurred."));
       }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movix/utils/constants/app_txt_styles.dart';
+
+import '../../utils/constants/app_txt_styles.dart';
 
 class GlobalButton extends StatelessWidget {
   const GlobalButton({

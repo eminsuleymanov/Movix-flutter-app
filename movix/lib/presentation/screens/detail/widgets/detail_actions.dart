@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movix/utils/extensions/locale_extension.dart';
 
 import '../../../../cubits/wishlist/wishlist_cubit.dart';
 import '../../../../utils/constants/app_sizedboxes.dart';
 import '../../../../utils/constants/app_strings.dart';
+import '../../../../utils/extensions/locale_extension.dart';
 import '../../../../utils/interfaces/movie_interface.dart';
 import 'detail_action_btn.dart';
 import 'movie_trailer_dialog.dart';

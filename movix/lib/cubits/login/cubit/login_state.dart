@@ -26,15 +26,3 @@ final class ResetPasswordSuccess extends LoginState {
   final String message;
   ResetPasswordSuccess(this.message);
 }
-
-
-// final class LogOut extends LoginState{
-//   final String message;
-
-//   LogOut(this.message);
-// }
-// final class LogOutError extends LoginState{
-//   final String message;
-
-//   LogOutError(this.message);
-// }

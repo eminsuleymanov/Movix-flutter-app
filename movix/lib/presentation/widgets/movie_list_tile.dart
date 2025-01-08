@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movix/cubits/wishlist/wishlist_cubit.dart';
 
+import '../../cubits/wishlist/wishlist_cubit.dart';
 import '../../utils/constants/app_colors.dart';
 import '../../utils/constants/app_paddings.dart';
 import '../../utils/constants/app_sizedboxes.dart';
