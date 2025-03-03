@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,50 +20,49 @@ class UserCubit extends Cubit<UserState> {
 
   final TextEditingController editNameController = TextEditingController();
   final TextEditingController editEmailController = TextEditingController();
-  final TextEditingController editPasswordController = TextEditingController();
-  final TextEditingController editConPasswordController =
+  final TextEditingController editOldPasswordController =
+      TextEditingController();
+  final TextEditingController editNewPasswordController =
       TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
   final BehaviorSubject<File?> profilePhoto = BehaviorSubject<File?>();
 
   Future<void> fetchUserData() async {
-  try {
-    emit(UserLoading());
-    final currentUser = _firebaseAuth.currentUser;
+    try {
+      emit(UserLoading());
+      final currentUser = _firebaseAuth.currentUser;
 
-    if (currentUser == null) {
-      emit(UserError(error: "User not logged in."));
-      return;
+      if (currentUser == null) {
+        emit(UserError(error: "User not logged in."));
+        return;
+      }
+
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .get();
+
+      if (!userDoc.exists) {
+        emit(UserError(error: "User data not found."));
+        return;
+      }
+
+      final data = userDoc.data();
+      if (data != null) {
+        final userModel = UserModel.fromDoc(userDoc.id, data);
+
+        emit(UserSuccess(
+          userModel: userModel,
+          message: "User data loaded successfully.",
+        ));
+      } else {
+        emit(UserError(error: "User data is empty."));
+      }
+    } catch (e) {
+      emit(UserError(error: "Failed to load user data: $e"));
     }
-
-    final userDoc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(currentUser.uid)
-        .get();
-
-    if (!userDoc.exists) {
-      emit(UserError(error: "User data not found."));
-      return;
-    }
-
-    final data = userDoc.data();
-    if (data != null) {
-      final userModel = UserModel.fromDoc(userDoc.id, data);
-
-      emit(UserSuccess(
-        userModel: userModel,
-        message: "User data loaded successfully.",
-      ));
-    } else {
-      emit(UserError(error: "User data is empty."));
-    }
-  } catch (e) {
-    emit(UserError(error: "Failed to load user data: $e"));
   }
-}
-
-
 
   Future<void> signOut() async {
     emit(UserLoading());
@@ -80,7 +78,6 @@ class UserCubit extends Cubit<UserState> {
   }
 
   Future<void> editUserProfile() async {
-  try {
     emit(UserLoading());
 
     final user = _firebaseAuth.currentUser;
@@ -91,58 +88,88 @@ class UserCubit extends Cubit<UserState> {
 
     final displayName = editNameController.text.trim();
     final email = editEmailController.text.trim();
-    final password = editPasswordController.text.trim();
-    final confirmPassword = editConPasswordController.text.trim();
+    final oldPassword = editOldPasswordController.text.trim();
+    final newPassword = editNewPasswordController.text.trim();
 
-    if (displayName.isNotEmpty && displayName != user.displayName) {
-      await user.updateDisplayName(displayName);
-    }
-
-    if (email.isNotEmpty && email != user.email) {
-      await user.verifyBeforeUpdateEmail(email);
-    }
-
-    if (password.isNotEmpty) {
-      if (password != confirmPassword) {
-        emit(UserError(error: "Passwords do not match."));
-        return;
+    try {
+      if (displayName.isNotEmpty && displayName != user.displayName) {
+        await user.updateDisplayName(displayName);
       }
-      await user.updatePassword(password);
+    } catch (e) {
+      emit(UserError(error: "Failed to update display name: $e"));
+      return;
     }
 
-    final photoUrl = await uploadProfilePhoto(); 
-    if (photoUrl != null) {
-      await user.updatePhotoURL(photoUrl);
+    try {
+      if (email.isNotEmpty && email != user.email) {
+        await user.verifyBeforeUpdateEmail(email);
+      }
+    } catch (e) {
+      emit(UserError(error: "Failed to update email: $e"));
+      return;
     }
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid)
-        .set({
-          'displayName': displayName.isNotEmpty ? displayName : user.displayName,
-          'email': email.isNotEmpty ? email : user.email,
-          'photoUrl': photoUrl ?? '',
-        }, SetOptions(merge: true));
+    try {
+      if (newPassword.isNotEmpty) {
+        if (oldPassword == newPassword) {
+          emit(UserError(
+              error: "New password cannot be the same as the old password."));
+          return;
+        }
 
-    await user.reload();
+        final credential = EmailAuthProvider.credential(
+          email: user.email!,
+          password: oldPassword,
+        );
+        await user.reauthenticateWithCredential(
+            credential); 
+        await user.updatePassword(newPassword);
+      }
+    } catch (e) {
+      emit(UserError(error: "Failed to update password: $e"));
+      return;
+    }
 
-    fetchUserData();
+    String? photoUrl;
+    try {
+      photoUrl = await uploadProfilePhoto();
+      if (photoUrl != null) {
+        await user.updatePhotoURL(photoUrl);
+      }
+    } catch (e) {
+      emit(UserError(error: "Failed to upload photo: $e"));
+      return;
+    }
 
-    emit(UserSuccess(
-      userModel: UserModel(
-        uid: user.uid,
-        displayName: displayName.isNotEmpty ? displayName : user.displayName,
-        email: email.isNotEmpty ? email : user.email,
-        photoUrl: photoUrl ?? '',
-      ),
-      message: "Profile updated successfully.",
-    ));
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'displayName': displayName.isNotEmpty ? displayName : user.displayName,
+        'email': email.isNotEmpty ? email : user.email,
+        'photoUrl': photoUrl ?? user.photoURL,
+      }, SetOptions(merge: true));
+    } catch (e) {
+      emit(UserError(error: "Failed to update Firestore: $e"));
+      return;
+    }
+    try {
+      await user.reload();
+      fetchUserData();
+
+      emit(UserSuccess(
+        userModel: UserModel(
+          uid: user.uid,
+          displayName: displayName.isNotEmpty ? displayName : user.displayName,
+          email: email.isNotEmpty ? email : user.email,
+          photoUrl: photoUrl ?? user.photoURL ?? '',
+        ),
+        message: "Profile updated successfully.",
+      ));
+    } catch (e) {
+      emit(UserError(error: "Failed to reload user data: $e"));
+      return;
+    }
     resetControllers();
-  } catch (e) {
-    emit(UserError(error: "Failed to update profile: $e"));
   }
-}
-
 
   Future<void> pickProfilePhoto() async {
     emit(UserImageLoading());
@@ -154,7 +181,6 @@ class UserCubit extends Cubit<UserState> {
         emit(UserImagePickedSuccess());
       } else {
         emit(UserImageUploadedError(error: 'No image selected.'));
-        
       }
     } catch (e) {
       emit(UserImageUploadedError(error: 'Failed to pick an image: $e'));
@@ -164,30 +190,24 @@ class UserCubit extends Cubit<UserState> {
   Future<String?> uploadProfilePhoto() async {
     final File? imageFile = profilePhoto.value;
     if (imageFile == null) {
-      emit(UserImageUploadedError(error: 'No image selected'));
+      return null;
     }
 
     emit(UserLoading());
     final user = _firebaseAuth.currentUser;
+    if (user == null) {
+      emit(UserError(error: "User not authenticated."));
+      return null;
+    }
+
     try {
-      if (user == null) {
-        log("User not authenticated.");
-      }
       final ref =
-          FirebaseStorage.instance.ref('profile_photos/${user!.uid}.jpg');
-      await ref.putFile(imageFile!);
-
+          FirebaseStorage.instance.ref('profile_photos/${user.uid}.jpg');
+      await ref.putFile(imageFile);
       final downloadUrl = await ref.getDownloadURL();
-      log('url goturdu $downloadUrl');
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .update({'photoUrl': downloadUrl});
-
-      log('all done');
       return downloadUrl;
     } catch (e) {
-      emit(UserImageUploadedError(error: 'Failed to upload image.$e'));
+      emit(UserImageUploadedError(error: 'Failed to upload image: $e'));
       return null;
     }
   }
@@ -195,16 +215,16 @@ class UserCubit extends Cubit<UserState> {
   void resetControllers() {
     editNameController.clear();
     editEmailController.clear();
-    editPasswordController.clear();
-    editConPasswordController.clear();
+    editOldPasswordController.clear();
+    editNewPasswordController.clear();
   }
 
   @override
   Future<void> close() {
     editNameController.dispose();
     editEmailController.dispose();
-    editPasswordController.dispose();
-    editConPasswordController.dispose();
+    editOldPasswordController.dispose();
+    editNewPasswordController.dispose();
     profilePhoto.close();
     return super.close();
   }

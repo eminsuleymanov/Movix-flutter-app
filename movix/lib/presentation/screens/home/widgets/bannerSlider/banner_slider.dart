@@ -36,7 +36,7 @@ class BannerSlider extends StatelessWidget {
             options: CarouselOptions(
               height: 250,
               enlargeCenterPage: true,
-              autoPlay: false,
+              autoPlay: true,
             ),
           );
         } else if (snapshot.hasError) {

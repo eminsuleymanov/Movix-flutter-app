@@ -11,8 +11,8 @@ import '../../widgets/custom_basic_appbar.dart';
 import '../../widgets/global_button.dart';
 import '../../widgets/global_profile_avatar.dart';
 import '../../widgets/global_snackbar.dart';
-import '../auth/register/widgets/inputs/confirm_pasword_input.dart';
 import '../home/home_view.dart';
+import 'widgets/inputs/confirmpassword/confirm_password_input.dart';
 import 'widgets/inputs/email/email_input.dart';
 import 'widgets/inputs/fullname/full_name_input.dart';
 import 'widgets/inputs/password/password_input.dart';
@@ -46,9 +46,9 @@ class EditProfileScreen extends StatelessWidget {
                 AppSizedboxes.h16,
                 const EmailInput(),
                 AppSizedboxes.h16,
-                const PasswordInput(),
+                const ConfirmPasswordInput(),
                 AppSizedboxes.h16,
-                const ConfirmPaswordInput(),
+                const PasswordInput(),
                 AppSizedboxes.h25,
                 GlobalButton(
                   text: context.l10n.updateYourProfile,

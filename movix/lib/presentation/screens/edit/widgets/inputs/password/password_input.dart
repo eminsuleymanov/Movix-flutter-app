@@ -13,9 +13,9 @@ class PasswordInput extends StatelessWidget {
     final userCubit = context.read<UserCubit>();
 
     return GlobalInput(
-      controller: userCubit.editPasswordController,
+      controller: userCubit.editOldPasswordController,
       isSecure: true,
-      label: AppStrings.password,
+      label: AppStrings.oldPassword,
     );
   }
 }

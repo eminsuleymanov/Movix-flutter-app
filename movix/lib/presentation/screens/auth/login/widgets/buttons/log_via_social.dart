@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movix/utils/constants/app_colors.dart';
-import 'package:movix/utils/constants/assets_paths.dart';
 
 import '../../../../../../cubits/login/cubit/login_cubit.dart';
+import '../../../../../../utils/constants/app_colors.dart';
+import '../../../../../../utils/constants/assets_paths.dart';
 
 class LogViaSocial extends StatelessWidget {
   const LogViaSocial({super.key});
@@ -36,28 +35,6 @@ class LogViaSocial extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          width: 20.w,
-        ),
-        GestureDetector(
-          onTap: (){},
-          child: DecoratedBox(
-            decoration: const BoxDecoration(
-              color: AppColors.background2,
-              shape: BoxShape.circle,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    FontAwesomeIcons.facebookF,
-                    color: Colors.blue,
-                    size: 40,
-                  )),
-            ),
-          ),
-        )
       ],
     );
   }
